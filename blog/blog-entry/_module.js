@@ -265,14 +265,6 @@ function attr(node, attribute, value) {
     else if (node.getAttribute(attribute) !== value)
         node.setAttribute(attribute, value);
 }
-/**
- * List of attributes that should always be set through the attr method,
- * because updating them through the property setter doesn't work reliably.
- * In the example of `width`/`height`, the problem is that the setter only
- * accepts numeric values, but the attribute can also be set to a string like `50%`.
- * If this list becomes too big, rethink this approach.
- */
-const always_set_through_set_attribute = ['width', 'height'];
 function set_attributes(node, attributes) {
     // @ts-ignore
     const descriptors = Object.getOwnPropertyDescriptors(node.__proto__);
@@ -286,7 +278,7 @@ function set_attributes(node, attributes) {
         else if (key === '__value') {
             node.value = node[key] = attributes[key];
         }
-        else if (descriptors[key] && descriptors[key].set && always_set_through_set_attribute.indexOf(key) === -1) {
+        else if (descriptors[key] && descriptors[key].set) {
             node[key] = attributes[key];
         }
         else {
@@ -1071,11 +1063,11 @@ function create_fragment(ctx) {
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
-			t = text("/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 900px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: 3.5rem;\n  line-height: 1.15;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }");
+			t = text("/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 900px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: clamp(2rem, 10vw, 3rem);\n  line-height: 1.1;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }");
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-1bmx46i', document.head);
+			const head_nodes = head_selector('svelte-e7g7xe', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1099,7 +1091,7 @@ function create_fragment(ctx) {
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
 			var style_nodes = children(style);
-			t = claim_text(style_nodes, "/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 900px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: 3.5rem;\n  line-height: 1.15;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }");
+			t = claim_text(style_nodes, "/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 900px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: clamp(2rem, 10vw, 3rem);\n  line-height: 1.1;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }");
 			style_nodes.forEach(detach);
 			head_nodes.forEach(detach);
 			this.h();
@@ -3552,7 +3544,7 @@ function create_fragment$2(ctx) {
 			attr(header, "class", "section-container svelte-hfomrx");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-87de15f1-c2a2-462b-b035-1f2813a1bd07");
+			attr(div3, "id", "section-8b77acfe-0471-48e3-99b2-a702dfe9a248");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -3792,15 +3784,15 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span, "class", "superhead svelte-goo8dm");
-			attr(h1, "class", "heading svelte-goo8dm");
+			attr(span, "class", "superhead svelte-1azx7n7");
+			attr(h1, "class", "heading svelte-1azx7n7");
 			if (!src_url_equal(img.src, img_src_value = /*image*/ ctx[0].url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*image*/ ctx[0].alt);
-			attr(img, "class", "svelte-goo8dm");
-			attr(header, "class", "section-container svelte-goo8dm");
+			attr(img, "class", "svelte-1azx7n7");
+			attr(header, "class", "section-container svelte-1azx7n7");
 			attr(div0, "class", "component");
 			attr(div1, "class", "section");
-			attr(div1, "id", "section-9a5e7b5f-f1ab-4407-b390-34bc86095bba");
+			attr(div1, "id", "section-6e907cf3-a2c5-44a9-9cf1-bd23fd60b21f");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div1, anchor);
@@ -3902,11 +3894,11 @@ function create_fragment$4(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div0, "class", "section-container content svelte-1bh66ja");
+			attr(div0, "class", "section-container content svelte-3333ce");
 			attr(div1, "class", "section");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-03dd0c4f-8121-4e78-a0bd-016884b8c08c");
+			attr(div3, "id", "section-03ae5798-4fec-487a-a172-2a425cc49475");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -4005,7 +3997,7 @@ function create_each_block$1(ctx) {
 		h() {
 			attr(a, "href", a_href_value = /*link*/ ctx[7].url);
 			attr(a, "aria-label", a_aria_label_value = /*icon*/ ctx[8]);
-			attr(a, "class", "svelte-a6wrmi");
+			attr(a, "class", "svelte-147r2jw");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
@@ -4144,16 +4136,16 @@ function create_fragment$5(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span0, "class", "copyright svelte-a6wrmi");
+			attr(span0, "class", "copyright svelte-147r2jw");
 			attr(a, "href", "https://primo.so");
-			attr(a, "class", "svelte-a6wrmi");
-			attr(span1, "class", "primo svelte-a6wrmi");
-			attr(ul, "class", "svelte-a6wrmi");
-			attr(div0, "class", "footer svelte-a6wrmi");
-			attr(div1, "class", "section-container svelte-a6wrmi");
+			attr(a, "class", "svelte-147r2jw");
+			attr(span1, "class", "primo svelte-147r2jw");
+			attr(ul, "class", "svelte-147r2jw");
+			attr(div0, "class", "footer svelte-147r2jw");
+			attr(div1, "class", "section-container svelte-147r2jw");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-9b9b6fc1-9137-4330-b06b-b0fa2be8c9e6");
+			attr(div3, "id", "section-e4eb1876-281c-45b3-af17-11ef1d67715b");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -4386,7 +4378,7 @@ function create_fragment$6(ctx) {
 				title: "",
 				description: "",
 				superhead: "JUNE 3, 2023 ",
-				heading: "Title of the blog"
+				heading: "Some title for the blog"
 			}
 		});
 
@@ -4401,7 +4393,7 @@ function create_fragment$6(ctx) {
 				description: "",
 				content: {
 					"html": "<h1>Heading 1</h1><p>Represent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark> in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had <strong>work of destruction</strong>.</p><p><em>Some more text that's italicized to make an impact.</em></p><ol><li><p>Here are some new ways to learn about this article</p></li><li><p>Some more ways</p></li><li><p>Go to \"Site\" and then css to change the styling of this editorial content.</p></li></ol><h2>Heading 2</h2><p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when <strong><mark>fundamentals</mark></strong> are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was <strong><mark>constructing</mark></strong> first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.</p><h3>Heading 3</h3><p>Some content that is interesting to read about. Many length did sections. The there and wonder take release cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.</p>",
-					"markdown": "# Heading 1\n\nRepresent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark>\n\n in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had **work of destruction**.\n\n*Some more text that's italicized to make an impact.*\n\n1. Here are some new ways to learn about this article\n\n2. Some more ways\n\n3. Go to \"Site\" and then css to change the styling of this editorial content.\n\n\n<!-- -->\n\n## Heading 2\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when **<mark>fundamentals</mark>\n\n** are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was **<mark>constructing</mark>\n\n** first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.\n\n### Heading 3\n\nSome content that is interesting to read about. Many length did sections. The there and wonder take release cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.\n\n"
+					"markdown": "# How to start doing what you're meant to be doing for example\n\nRepresent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark>\n\n in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had **work of destruction**.\n\n*Some more text that's italicized to make an impact.*\n\n1. Here are some new ways to learn about this article\n\n2. Some more ways\n\n3. Go to \"Site\" and then css to change the styling of this editorial content.\n\n\n<!-- -->\n\n## Heading 2\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when **<mark>fundamentals</mark>\n\n** are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was **<mark>constructing</mark>\n\n** first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.\n\n### Heading 3\n\nSome content that is interesting to read about. Many length did sections. The there and wonder take release cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.\n\n"
 				}
 			}
 		});
