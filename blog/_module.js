@@ -3726,7 +3726,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (89:10) {#if item.thumbnail.url}
+// (105:8) {#if item.thumbnail.url}
 function create_if_block$3(ctx) {
 	let img;
 	let img_data_key_value;
@@ -3752,7 +3752,7 @@ function create_if_block$3(ctx) {
 			attr(img, "data-key", img_data_key_value = "items[" + /*i*/ ctx[8] + "].thumbnail");
 			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[6].thumbnail.url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*item*/ ctx[6].thumbnail.alt);
-			attr(img, "class", "svelte-cex2al");
+			attr(img, "class", "svelte-di9dxy");
 		},
 		m(target, anchor) {
 			insert_hydration(target, img, anchor);
@@ -3772,24 +3772,21 @@ function create_if_block$3(ctx) {
 	};
 }
 
-// (82:6) {#each items as item, i}
+// (88:4) {#each items as item, i}
 function create_each_block$1(ctx) {
 	let li;
 	let div1;
 	let a;
 	let t0_value = /*item*/ ctx[6].link.label + "";
 	let t0;
-	let a_data_key_value;
 	let a_href_value;
 	let t1;
 	let div0;
 	let raw_value = /*item*/ ctx[6].description.html + "";
-	let div0_data_key_value;
 	let t2;
 	let span;
 	let t3_value = /*item*/ ctx[6].date + "";
 	let t3;
-	let span_data_key_value;
 	let t4;
 	let t5;
 	let if_block = /*item*/ ctx[6].thumbnail.url && create_if_block$3(ctx);
@@ -3815,22 +3812,16 @@ function create_each_block$1(ctx) {
 			var li_nodes = children(li);
 			div1 = claim_element(li_nodes, "DIV", { class: true });
 			var div1_nodes = children(div1);
-
-			a = claim_element(div1_nodes, "A", {
-				"data-key": true,
-				class: true,
-				href: true
-			});
-
+			a = claim_element(div1_nodes, "A", { class: true, href: true });
 			var a_nodes = children(a);
 			t0 = claim_text(a_nodes, t0_value);
 			a_nodes.forEach(detach);
 			t1 = claim_space(div1_nodes);
-			div0 = claim_element(div1_nodes, "DIV", { class: true, "data-key": true });
+			div0 = claim_element(div1_nodes, "DIV", { class: true });
 			var div0_nodes = children(div0);
 			div0_nodes.forEach(detach);
 			t2 = claim_space(div1_nodes);
-			span = claim_element(div1_nodes, "SPAN", { class: true, "data-key": true });
+			span = claim_element(div1_nodes, "SPAN", { class: true });
 			var span_nodes = children(span);
 			t3 = claim_text(span_nodes, t3_value);
 			span_nodes.forEach(detach);
@@ -3842,15 +3833,12 @@ function create_each_block$1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(a, "data-key", a_data_key_value = "items[" + /*i*/ ctx[8] + "].link");
-			attr(a, "class", "title svelte-cex2al");
+			attr(a, "class", "title svelte-di9dxy");
 			attr(a, "href", a_href_value = /*item*/ ctx[6].link.url);
-			attr(div0, "class", "description svelte-cex2al");
-			attr(div0, "data-key", div0_data_key_value = "items[" + /*i*/ ctx[8] + "].description");
-			attr(span, "class", "date svelte-cex2al");
-			attr(span, "data-key", span_data_key_value = "items[" + /*i*/ ctx[8] + "].date");
+			attr(div0, "class", "description svelte-di9dxy");
+			attr(span, "class", "date svelte-di9dxy");
 			attr(div1, "class", "post-info");
-			attr(li, "class", "svelte-cex2al");
+			attr(li, "class", "svelte-di9dxy");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
@@ -3897,10 +3885,9 @@ function create_each_block$1(ctx) {
 }
 
 function create_fragment$3(ctx) {
-	let div2;
 	let div1;
-	let section;
 	let div0;
+	let section;
 	let h2;
 	let t0;
 	let t1;
@@ -3914,10 +3901,9 @@ function create_fragment$3(ctx) {
 
 	return {
 		c() {
-			div2 = element("div");
 			div1 = element("div");
-			section = element("section");
 			div0 = element("div");
+			section = element("section");
 			h2 = element("h2");
 			t0 = text(/*heading*/ ctx[0]);
 			t1 = space();
@@ -3930,20 +3916,18 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			div2 = claim_element(nodes, "DIV", { class: true, id: true });
-			var div2_nodes = children(div2);
-			div1 = claim_element(div2_nodes, "DIV", { class: true });
+			div1 = claim_element(nodes, "DIV", { class: true, id: true });
 			var div1_nodes = children(div1);
-			section = claim_element(div1_nodes, "SECTION", { class: true });
-			var section_nodes = children(section);
-			div0 = claim_element(section_nodes, "DIV", { class: true });
+			div0 = claim_element(div1_nodes, "DIV", { class: true });
 			var div0_nodes = children(div0);
-			h2 = claim_element(div0_nodes, "H2", { class: true });
+			section = claim_element(div0_nodes, "SECTION", { class: true });
+			var section_nodes = children(section);
+			h2 = claim_element(section_nodes, "H2", { class: true });
 			var h2_nodes = children(h2);
 			t0 = claim_text(h2_nodes, /*heading*/ ctx[0]);
 			h2_nodes.forEach(detach);
-			t1 = claim_space(div0_nodes);
-			ul = claim_element(div0_nodes, "UL", { class: true });
+			t1 = claim_space(section_nodes);
+			ul = claim_element(section_nodes, "UL", { class: true });
 			var ul_nodes = children(ul);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -3951,30 +3935,27 @@ function create_fragment$3(ctx) {
 			}
 
 			ul_nodes.forEach(detach);
-			div0_nodes.forEach(detach);
 			section_nodes.forEach(detach);
+			div0_nodes.forEach(detach);
 			div1_nodes.forEach(detach);
-			div2_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "svelte-cex2al");
-			attr(ul, "class", "items svelte-cex2al");
-			attr(div0, "class", "section-container svelte-cex2al");
-			attr(section, "class", "svelte-cex2al");
-			attr(div1, "class", "component");
-			attr(div2, "class", "section");
-			attr(div2, "id", "section-71b583d2-e0e7-4da5-8a6f-ff3f7f4fc064");
+			attr(h2, "class", "svelte-di9dxy");
+			attr(ul, "class", "items svelte-di9dxy");
+			attr(section, "class", "section-container svelte-di9dxy");
+			attr(div0, "class", "component");
+			attr(div1, "class", "section");
+			attr(div1, "id", "section-71b583d2-e0e7-4da5-8a6f-ff3f7f4fc064");
 		},
 		m(target, anchor) {
-			insert_hydration(target, div2, anchor);
-			append_hydration(div2, div1);
-			append_hydration(div1, section);
-			append_hydration(section, div0);
-			append_hydration(div0, h2);
+			insert_hydration(target, div1, anchor);
+			append_hydration(div1, div0);
+			append_hydration(div0, section);
+			append_hydration(section, h2);
 			append_hydration(h2, t0);
-			append_hydration(div0, t1);
-			append_hydration(div0, ul);
+			append_hydration(section, t1);
+			append_hydration(section, ul);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				if (each_blocks[i]) {
@@ -4011,7 +3992,7 @@ function create_fragment$3(ctx) {
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if (detaching) detach(div2);
+			if (detaching) detach(div1);
 			destroy_each(each_blocks, detaching);
 		}
 	};

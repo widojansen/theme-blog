@@ -165,11 +165,11 @@
             top: 1rem
         }
 
-        .section-container.svelte-cex2al.svelte-cex2al {
+        .section-container.svelte-di9dxy.svelte-di9dxy {
             max-width: var(--inner-max-width, 900px)
         }
 
-        h2.svelte-cex2al.svelte-cex2al {
+        h2.svelte-di9dxy.svelte-di9dxy {
             font-size: 1rem;
             line-height: 1.1;
             font-weight: 600;
@@ -179,26 +179,36 @@
             border-bottom: 1px solid #f0f0f0
         }
 
-        ul.items.svelte-cex2al.svelte-cex2al {
+        ul.items.svelte-di9dxy.svelte-di9dxy {
             display: grid;
             gap: 4rem
         }
 
-        li.svelte-cex2al.svelte-cex2al {
+        li.svelte-di9dxy.svelte-di9dxy {
             display: grid;
             gap: 3rem
         }
 
-        li.svelte-cex2al .post-info .title.svelte-cex2al {
+        li.svelte-di9dxy .post-info .title.svelte-di9dxy {
             display: block;
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
             line-height: 1.2;
-            letter-spacing: -0.02rem
+            letter-spacing: -0.02rem;
+            -webkit-text-decoration: underline transparent;
+            text-decoration: underline transparent;
+            transition: 0.1s -webkit-text-decoration;
+            transition: 0.1s text-decoration;
+            transition: 0.1s text-decoration, 0.1s -webkit-text-decoration
         }
 
-        li.svelte-cex2al .post-info .description.svelte-cex2al {
+        li.svelte-di9dxy .post-info .title.svelte-di9dxy:hover {
+            -webkit-text-decoration-color: initial;
+            text-decoration-color: initial
+        }
+
+        li.svelte-di9dxy .post-info .description.svelte-di9dxy {
             font-size: 1rem;
             margin-bottom: 0.5rem;
             font-family: var(--body-font);
@@ -207,20 +217,20 @@
             color: #2d3339
         }
 
-        li.svelte-cex2al .post-info .date.svelte-cex2al {
+        li.svelte-di9dxy .post-info .date.svelte-di9dxy {
             font-size: 1rem;
             font-weight: 400;
             color: var(--color-accent2);
             font-weight: 400
         }
 
-        li.svelte-cex2al img.svelte-cex2al {
+        li.svelte-di9dxy img.svelte-di9dxy {
             box-shadow: var(--box-shadow);
             border-radius: var(--border-radius)
         }
 
         @media(min-width: 600px) {
-            li.svelte-cex2al.svelte-cex2al {
+            li.svelte-di9dxy.svelte-di9dxy {
                 grid-template-columns: 3fr 1fr;
                 gap: 4rem
             }
@@ -306,48 +316,50 @@
     </div>
     <div class="section" id="section-71b583d2-e0e7-4da5-8a6f-ff3f7f4fc064">
         <div class="component">
-            <section class="svelte-cex2al">
-                <div class="section-container svelte-cex2al">
-                    <h2 class="svelte-cex2al">All Articles</h2>
-                    <ul class="items svelte-cex2al">
-                        <li class="svelte-cex2al">
-                            <div class="post-info"><a data-key="items[0].link" class="title svelte-cex2al" href="/blog-entry">Mastering the art of responsive design: a comprehensive guide</a>
-                                <div class="description svelte-cex2al" data-key="items[0].description"><!-- HTML_TAG_START -->
-                                    <p>This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.</p><!-- HTML_TAG_END -->
-                                </div>
-                                <span class="date svelte-cex2al" data-key="items[0].date">June 3, 2023</span>
+            <section class="section-container svelte-di9dxy">
+                <h2 class="svelte-di9dxy">All Articles</h2>
+                <ul class="items svelte-di9dxy">
+                    <li class="svelte-di9dxy">
+                        <div class="post-info"><a class="title svelte-di9dxy" href="/blog-entry">Mastering the art of responsive design: a comprehensive guide</a>
+                            <div class="description svelte-di9dxy"><!-- HTML_TAG_START -->
+                                <p>This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.</p><!-- HTML_TAG_END -->
                             </div>
-                            <img data-key="items[0].thumbnail" src="https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-cex2al">
-                        </li>
-                        <li class="svelte-cex2al">
-                            <div class="post-info"><a data-key="items[1].link" class="title svelte-cex2al" href="/blog-entry">10 essential tools every web developer should know</a>
-                                <div class="description svelte-cex2al" data-key="items[1].description"><!-- HTML_TAG_START -->
-                                    <p>Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.</p><!-- HTML_TAG_END -->
-                                </div>
-                                <span class="date svelte-cex2al" data-key="items[1].date">August 12, 2023</span>
+                            <span class="date svelte-di9dxy">June 3, 2023</span>
+                        </div>
+
+                        <img data-key="items[0].thumbnail" src="https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-di9dxy">
+                    </li>
+                    <li class="svelte-di9dxy">
+                        <div class="post-info"><a class="title svelte-di9dxy" href="/blog-entry">10 essential tools every web developer should know</a>
+                            <div class="description svelte-di9dxy"><!-- HTML_TAG_START -->
+                                <p>Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.</p><!-- HTML_TAG_END -->
                             </div>
-                            <img data-key="items[1].thumbnail" src="https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2371&amp;q=80" alt="" class="svelte-cex2al">
-                        </li>
-                        <li class="svelte-cex2al">
-                            <div class="post-info"><a data-key="items[2].link" class="title svelte-cex2al" href="/blog-entry">The future of web design: exploring innovative trends &amp; technologies</a>
-                                <div class="description svelte-cex2al" data-key="items[2].description"><!-- HTML_TAG_START -->
-                                    <p>Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry.</p><!-- HTML_TAG_END -->
-                                </div>
-                                <span class="date svelte-cex2al" data-key="items[2].date">September 12, 2023</span>
+                            <span class="date svelte-di9dxy">August 12, 2023</span>
+                        </div>
+
+                        <img data-key="items[1].thumbnail" src="https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2371&amp;q=80" alt="" class="svelte-di9dxy">
+                    </li>
+                    <li class="svelte-di9dxy">
+                        <div class="post-info"><a class="title svelte-di9dxy" href="/blog-entry">The future of web design: exploring innovative trends &amp; technologies</a>
+                            <div class="description svelte-di9dxy"><!-- HTML_TAG_START -->
+                                <p>Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry.</p><!-- HTML_TAG_END -->
                             </div>
-                            <img data-key="items[2].thumbnail" src="https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-cex2al">
-                        </li>
-                        <li class="svelte-cex2al">
-                            <div class="post-info"><a data-key="items[3].link" class="title svelte-cex2al" href="/blog-entry">The Power of Minimalism in UI/UX Design</a>
-                                <div class="description svelte-cex2al" data-key="items[3].description"><!-- HTML_TAG_START -->
-                                    <p>Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics.</p><!-- HTML_TAG_END -->
-                                </div>
-                                <span class="date svelte-cex2al" data-key="items[3].date">December 12, 2023</span>
+                            <span class="date svelte-di9dxy">September 12, 2023</span>
+                        </div>
+
+                        <img data-key="items[2].thumbnail" src="https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-di9dxy">
+                    </li>
+                    <li class="svelte-di9dxy">
+                        <div class="post-info"><a class="title svelte-di9dxy" href="/blog-entry">The Power of Minimalism in UI/UX Design</a>
+                            <div class="description svelte-di9dxy"><!-- HTML_TAG_START -->
+                                <p>Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics.</p><!-- HTML_TAG_END -->
                             </div>
-                            <img data-key="items[3].thumbnail" src="https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2313&amp;q=80" alt="" class="svelte-cex2al">
-                        </li>
-                    </ul>
-                </div>
+                            <span class="date svelte-di9dxy">December 12, 2023</span>
+                        </div>
+
+                        <img data-key="items[3].thumbnail" src="https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2313&amp;q=80" alt="" class="svelte-di9dxy">
+                    </li>
+                </ul>
             </section>
         </div>
     </div>
