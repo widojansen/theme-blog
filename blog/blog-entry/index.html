@@ -256,35 +256,35 @@
             border-radius: var(--border-radius)
         }
 
-        .section-container.svelte-jwevs8.svelte-jwevs8 {
+        .section-container.svelte-a9pabn.svelte-a9pabn {
             display: grid;
             gap: 1.5rem;
             max-width: var(--inner-max-width);
             padding: 0 2rem 5rem 2rem
         }
 
-        hr.svelte-jwevs8.svelte-jwevs8 {
-            border-color: #C6CCD2;
+        hr.svelte-a9pabn.svelte-a9pabn {
+            border-color: #c6ccd2;
             margin-bottom: 3rem
         }
 
-        .title.svelte-jwevs8.svelte-jwevs8 {
+        .title.svelte-a9pabn.svelte-a9pabn {
             font-size: 1.5rem;
             letter-spacing: -0.04rem;
             font-weight: 600;
             text-align: center
         }
 
-        form.svelte-jwevs8.svelte-jwevs8 {
+        form.svelte-a9pabn.svelte-a9pabn {
             display: flex;
             gap: 0.3rem
         }
 
-        form.svelte-jwevs8 label.svelte-jwevs8 {
+        form.svelte-a9pabn label.svelte-a9pabn {
             flex: 1
         }
 
-        form.svelte-jwevs8 label input.svelte-jwevs8 {
+        form.svelte-a9pabn label input.svelte-a9pabn {
             width: 100%;
             padding: 0.4rem 0.75rem;
             outline-color: transparent;
@@ -294,8 +294,20 @@
             border-radius: 0.25rem
         }
 
-        form.svelte-jwevs8 label input.svelte-jwevs8:focus {
+        form.svelte-a9pabn label input.svelte-a9pabn:focus {
             outline-color: var(--color-accent, rebeccapurple)
+        }
+
+        .message.svelte-a9pabn.svelte-a9pabn {
+            text-align: center;
+            background: var(--background, white);
+            padding: 1rem;
+            box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 0.25rem
+        }
+
+        .message.error.svelte-a9pabn.svelte-a9pabn {
+            border: 2px solid red
         }
 
         .section-container.svelte-1excgdw.svelte-1excgdw {
@@ -357,10 +369,10 @@
     <div class="section" id="section-8b77acfe-0471-48e3-99b2-a702dfe9a248">
         <div class="component">
             <header class="section-container svelte-hfomrx">
-                <div class="desktop-nav svelte-hfomrx"><a href="/" class="logo svelte-hfomrx">Corta</a>
-                    <nav class="svelte-hfomrx"><a class="link svelte-hfomrx" href="/">Home</a><a class="link svelte-hfomrx" href="/about">About</a><a class="link svelte-hfomrx" href="/blog">Blog</a></nav>
+                <div class="desktop-nav svelte-hfomrx"><a href="/" class="logo svelte-hfomrx">corta</a>
+                    <nav class="svelte-hfomrx"><a class="link svelte-hfomrx" href="http://localhost:5173/">Home</a><a class="link svelte-hfomrx" href="http://localhost:5173/article-list">Blog</a><a class="link svelte-hfomrx" href="http://localhost:5173/article-list">About</a></nav>
                 </div>
-                <div class="mobile-nav svelte-hfomrx"><a href="/" class="logo svelte-hfomrx">Corta</a>
+                <div class="mobile-nav svelte-hfomrx"><a href="/" class="logo svelte-hfomrx">corta</a>
                     <button id="open" aria-label="Open mobile navigation"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="30" height="30" viewBox="0 0 24 24" class="iconify iconify--eva"><!-- HTML_TAG_START -->
                             <g id="iconifySvelte0">
                                 <g id="iconifySvelte1">
@@ -412,11 +424,11 @@
     </div>
     <div class="section" id="section-213c477b-2999-4e8d-9e27-4b2987bb09f8">
         <div class="component">
-            <section class="section-container svelte-jwevs8">
-                <hr class="svelte-jwevs8">
-                <h2 class="title svelte-jwevs8">Sign up to get weekly blog entires about X topic </h2>
-                <form class="svelte-jwevs8"><label class="svelte-jwevs8"><input type="text" placeholder="Email address" class="svelte-jwevs8"></label>
-                    <button class="button svelte-jwevs8" type="submit">Submit</button>
+            <section class="section-container svelte-a9pabn">
+                <hr class="svelte-a9pabn">
+                <h2 class="title svelte-a9pabn">Sign up to get weekly blog entires about X topic </h2>
+                <form class="svelte-a9pabn"><label class="svelte-a9pabn"><input required name="email" type="text" placeholder="Email address" class="svelte-a9pabn"></label>
+                    <button class="button svelte-a9pabn" type="submit">Submit</button>
                 </form>
             </section>
         </div>

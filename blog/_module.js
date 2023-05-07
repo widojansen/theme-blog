@@ -4423,15 +4423,26 @@ function create_fragment$5(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "Corta"
+					"title": "corta"
 				},
 				site_nav: [
-					{ "link": { "url": "/", "label": "Home" } },
 					{
-						"link": { "url": "/about", "label": "About" }
+						"link": {
+							"url": "http://localhost:5173/",
+							"label": "Home"
+						}
 					},
 					{
-						"link": { "url": "/blog", "label": "Blog" }
+						"link": {
+							"url": "http://localhost:5173/article-list",
+							"label": "Blog"
+						}
+					},
+					{
+						"link": {
+							"url": "http://localhost:5173/article-list",
+							"label": "About"
+						}
 					}
 				]
 			}
