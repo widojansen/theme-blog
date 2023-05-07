@@ -3,7 +3,7 @@
 
 <head>
     <meta name="generator" content="Primo" />
-    <title></title><!-- HEAD_svelte-cu3qlf_START -->
+    <title></title><!-- HEAD_svelte-1798dkp_START -->
     <link rel="shortcut icon" type="image/jpg" sizes="32x32" href="https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -18,11 +18,11 @@
         /* Design tokens (apply to components) */
         :root {
             /* Custom theme options */
-            --color-accent: #004700;
+            --color-accent: black;
             --color-accent2: #999999;
             --color-shade: #2d3339;
 
-            --inner-max-width: 900px;
+            --inner-max-width: 800px;
 
             /* Base values */
             --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@
 
         /* Elements */
         .section-container {
-            max-width: 1200px;
+            max-width: 1150px;
             margin: 0 auto;
             padding: 5rem 2rem;
         }
@@ -71,12 +71,13 @@
             color: white;
             background: var(--color-accent, rebeccapurple);
             border-radius: 0;
-            padding: 18px 24px;
+            padding: 1px 24px;
             transition: var(--transition, 0.1s box-shadow);
             border: 0;
+            /* reset */
+            border-radius: 0.25rem;
+            font-size: 1rem;
         }
-
-        /* reset */
 
         .button:hover {
             box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);
@@ -86,7 +87,7 @@
             background: transparent;
             color: var(--color-accent, rebeccapurple);
         }
-    </style><!-- HEAD_svelte-cu3qlf_END -->
+    </style><!-- HEAD_svelte-1798dkp_END -->
     <style>
         .section-container.svelte-hfomrx.svelte-hfomrx {
             display: flex;
@@ -166,70 +167,76 @@
             top: 1rem
         }
 
-        .section-container.svelte-jyo7jx.svelte-jyo7jx {
+        .section-container.svelte-cex2al.svelte-cex2al {
             max-width: var(--inner-max-width, 900px)
         }
 
-        h2.svelte-jyo7jx.svelte-jyo7jx {
-            font-size: 16px;
-            line-height: 36px;
+        h2.svelte-cex2al.svelte-cex2al {
+            font-size: 1rem;
+            line-height: 1.1;
             font-weight: 600;
             margin-bottom: 4rem;
             letter-spacing: -0.02rem;
+            padding: .5rem 0;
             border-bottom: 1px solid #f0f0f0
         }
 
-        ul.items.svelte-jyo7jx.svelte-jyo7jx {
+        ul.items.svelte-cex2al.svelte-cex2al {
             display: grid;
             gap: 4rem
         }
 
-        li.svelte-jyo7jx.svelte-jyo7jx {
+        li.svelte-cex2al.svelte-cex2al {
             display: grid;
             gap: 3rem
         }
 
-        li.svelte-jyo7jx .post-info .title.svelte-jyo7jx {
+        li.svelte-cex2al .post-info .title.svelte-cex2al {
+            display: block;
             font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             line-height: 1.2;
             letter-spacing: -0.02rem
         }
 
-        li.svelte-jyo7jx .post-info .description.svelte-jyo7jx {
+        li.svelte-cex2al .post-info .description.svelte-cex2al {
             font-size: 1rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             font-family: var(--body-font);
             line-height: 1.3;
             font-weight: 300;
             color: #2d3339
         }
 
-        li.svelte-jyo7jx .post-info .date.svelte-jyo7jx {
+        li.svelte-cex2al .post-info .date.svelte-cex2al {
             font-size: 1rem;
             font-weight: 400;
             color: var(--color-accent2);
             font-weight: 400
         }
 
-        li.svelte-jyo7jx img.svelte-jyo7jx {
+        li.svelte-cex2al img.svelte-cex2al {
             box-shadow: var(--box-shadow);
             border-radius: var(--border-radius)
         }
 
         @media(min-width: 600px) {
-            li.svelte-jyo7jx.svelte-jyo7jx {
+            li.svelte-cex2al.svelte-cex2al {
                 grid-template-columns: 3fr 1fr;
                 gap: 4rem
             }
         }
 
-        .section-container.svelte-147r2jw.svelte-147r2jw {
+        .section-container.svelte-1excgdw.svelte-1excgdw {
             padding: 2rem 2rem 1rem 2rem
         }
 
-        .footer.svelte-147r2jw.svelte-147r2jw {
+        hr.svelte-1excgdw.svelte-1excgdw {
+            border-color: #F2F2F2
+        }
+
+        .footer.svelte-1excgdw.svelte-1excgdw {
             display: flex;
             justify-content: space-between;
             flex-direction: start column;
@@ -238,37 +245,37 @@
             padding-bottom: 1rem
         }
 
-        .copyright.svelte-147r2jw.svelte-147r2jw {
+        .copyright.svelte-1excgdw.svelte-1excgdw {
             font-size: 0.75rem;
             color: var(--color-text-secondary, #2D3339)
         }
 
-        .primo.svelte-147r2jw.svelte-147r2jw {
+        .primo.svelte-1excgdw.svelte-1excgdw {
             font-weight: 600;
             font-size: 0.75rem
         }
 
-        .primo.svelte-147r2jw a.svelte-147r2jw {
+        .primo.svelte-1excgdw a.svelte-1excgdw {
             text-decoration: underline
         }
 
-        ul.svelte-147r2jw.svelte-147r2jw {
+        ul.svelte-1excgdw.svelte-1excgdw {
             display: flex;
             gap: 1.5rem;
             font-size: 1.5rem;
             list-style: none
         }
 
-        ul.svelte-147r2jw a.svelte-147r2jw {
+        ul.svelte-1excgdw a.svelte-1excgdw {
             transition: var(--transition)
         }
 
-        ul.svelte-147r2jw a.svelte-147r2jw:hover {
+        ul.svelte-1excgdw a.svelte-1excgdw:hover {
             color: var(--color-accent)
         }
 
         @media(min-width: 600px) {
-            ul.svelte-147r2jw.svelte-147r2jw {
+            ul.svelte-1excgdw.svelte-1excgdw {
                 font-size: 1.25rem
             }
         }
@@ -281,7 +288,7 @@
         <div class="component">
             <header class="section-container svelte-hfomrx">
                 <div class="desktop-nav svelte-hfomrx"><a href="/" class="logo svelte-hfomrx">Corta</a>
-                    <nav class="svelte-hfomrx"><a class="link svelte-hfomrx" href="http://localhost:5173/">Home</a><a class="link svelte-hfomrx" href="http://localhost:5173/article-list">About</a><a class="link svelte-hfomrx" href="http://localhost:5173/article-list">Blog</a></nav>
+                    <nav class="svelte-hfomrx"><a class="link svelte-hfomrx" href="http://localhost:5173/theme-blog">Home</a><a class="link svelte-hfomrx" href="http://localhost:5173/about">About</a><a class="link svelte-hfomrx" href="/blog">Blog</a></nav>
                 </div>
                 <div class="mobile-nav svelte-hfomrx"><a href="/" class="logo svelte-hfomrx">Corta</a>
                     <button id="open" aria-label="Open mobile navigation"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="30" height="30" viewBox="0 0 24 24" class="iconify iconify--eva"><!-- HTML_TAG_START -->
@@ -299,55 +306,47 @@
             </header>
         </div>
     </div>
-    <div class="section" id="section-69ba69e0-6c93-472b-94dc-4f924d1aa115">
+    <div class="section" id="section-6eeaaa91-2985-4785-97a2-5dd44b6ec00e">
         <div class="component">
-            <section class="svelte-jyo7jx">
-                <div class="section-container svelte-jyo7jx">
-                    <h2 class="svelte-jyo7jx">FEATURED POSTS</h2>
-                    <ul class="items svelte-jyo7jx">
-                        <li class="svelte-jyo7jx">
-                            <div class="post-info">
-                                <h3 class="title svelte-jyo7jx">How to code and design at the same time in the codebase.</h3>
-                                <div class="description svelte-jyo7jx"><!-- HTML_TAG_START -->
+            <section class="svelte-cex2al">
+                <div class="section-container svelte-cex2al">
+                    <h2 class="svelte-cex2al">FEATURED POSTS</h2>
+                    <ul class="items svelte-cex2al">
+                        <li class="svelte-cex2al">
+                            <div class="post-info"><a data-key="items[0].link" class="title svelte-cex2al" href="/blog-entry">Mastering the art of responsive design: a comprehensive guide</a>
+                                <div class="description svelte-cex2al" data-key="items[0].description"><!-- HTML_TAG_START -->
                                     <p>This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.</p><!-- HTML_TAG_END -->
                                 </div>
-
-                                <span class="date svelte-jyo7jx">June 3, 2023</span>
+                                <span class="date svelte-cex2al" data-key="items[0].date">June 3, 2023</span>
                             </div>
-                            <img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-jyo7jx">
+                            <img data-key="items[0].thumbnail" src="https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-cex2al">
                         </li>
-                        <li class="svelte-jyo7jx">
-                            <div class="post-info">
-                                <h3 class="title svelte-jyo7jx">Planning your next web project to save time in the long run, cutting your time per project in half.</h3>
-                                <div class="description svelte-jyo7jx"><!-- HTML_TAG_START -->
-                                    <h1>This is some markdown</h1><!-- HTML_TAG_END -->
+                        <li class="svelte-cex2al">
+                            <div class="post-info"><a data-key="items[1].link" class="title svelte-cex2al" href="/blog-entry">10 essential tools every web developer should know</a>
+                                <div class="description svelte-cex2al" data-key="items[1].description"><!-- HTML_TAG_START -->
+                                    <p>Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.</p><!-- HTML_TAG_END -->
                                 </div>
-
-                                <span class="date svelte-jyo7jx">June 3, 2023</span>
+                                <span class="date svelte-cex2al" data-key="items[1].date">August 12, 2023</span>
                             </div>
-                            <img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-jyo7jx">
+                            <img data-key="items[1].thumbnail" src="https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2371&amp;q=80" alt="" class="svelte-cex2al">
                         </li>
-                        <li class="svelte-jyo7jx">
-                            <div class="post-info">
-                                <h3 class="title svelte-jyo7jx">Do incididunt aute</h3>
-                                <div class="description svelte-jyo7jx"><!-- HTML_TAG_START -->
-                                    <h1 id="thisissomemarkdown">This is some markdown</h1><!-- HTML_TAG_END -->
+                        <li class="svelte-cex2al">
+                            <div class="post-info"><a data-key="items[2].link" class="title svelte-cex2al" href="/blog-entry">The future of web design: exploring innovative trends &amp; technologies</a>
+                                <div class="description svelte-cex2al" data-key="items[2].description"><!-- HTML_TAG_START -->
+                                    <p>Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry.</p><!-- HTML_TAG_END -->
                                 </div>
-
-                                <span class="date svelte-jyo7jx">Elit ullamco in</span>
+                                <span class="date svelte-cex2al" data-key="items[2].date">September 12, 2023</span>
                             </div>
-                            <img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-jyo7jx">
+                            <img data-key="items[2].thumbnail" src="https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-cex2al">
                         </li>
-                        <li class="svelte-jyo7jx">
-                            <div class="post-info">
-                                <h3 class="title svelte-jyo7jx">Nulla fugiat sunt</h3>
-                                <div class="description svelte-jyo7jx"><!-- HTML_TAG_START -->
-                                    <h1 id="thisissomemarkdown">This is some markdown</h1><!-- HTML_TAG_END -->
+                        <li class="svelte-cex2al">
+                            <div class="post-info"><a data-key="items[3].link" class="title svelte-cex2al" href="/blog-entry">The Power of Minimalism in UI/UX Design</a>
+                                <div class="description svelte-cex2al" data-key="items[3].description"><!-- HTML_TAG_START -->
+                                    <p>Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics.</p><!-- HTML_TAG_END -->
                                 </div>
-
-                                <span class="date svelte-jyo7jx">Anim dolore est</span>
+                                <span class="date svelte-cex2al" data-key="items[3].date">December 12, 2023</span>
                             </div>
-                            <img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-jyo7jx">
+                            <img data-key="items[3].thumbnail" src="https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2313&amp;q=80" alt="" class="svelte-cex2al">
                         </li>
                     </ul>
                 </div>
@@ -357,16 +356,16 @@
     <div class="section" id="section-13765790-eafd-4138-b734-4b00d06854ef">
         <div class="component">
             <footer>
-                <div class="section-container svelte-147r2jw">
-                    <hr>
-                    <div class="footer svelte-147r2jw"><span class="copyright svelte-147r2jw">Copyright 2023</span>
-                        <span class="primo svelte-147r2jw"><a href="https://primo.so" class="svelte-147r2jw">Primo</a> Powered </span>
-                        <ul class="svelte-147r2jw">
-                            <li><a href="https://twitter.com" aria-label="mdi:twitter" class="svelte-147r2jw"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START -->
+                <div class="section-container svelte-1excgdw">
+                    <hr class="svelte-1excgdw">
+                    <div class="footer svelte-1excgdw"><span class="copyright svelte-1excgdw">Copyright 2023</span>
+                        <span class="primo svelte-1excgdw"><a href="https://primo.so" class="svelte-1excgdw">Primo</a> Powered </span>
+                        <ul class="svelte-1excgdw">
+                            <li><a href="https://twitter.com" aria-label="mdi:twitter" class="svelte-1excgdw"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START -->
                                         <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z" /><!-- HTML_TAG_END -->
                                     </svg></a>
                             </li>
-                            <li><a href="https://github.com" aria-label="mdi:github" class="svelte-147r2jw"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START -->
+                            <li><a href="https://github.com" aria-label="mdi:github" class="svelte-1excgdw"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START -->
                                         <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" /><!-- HTML_TAG_END -->
                                     </svg></a>
                             </li>

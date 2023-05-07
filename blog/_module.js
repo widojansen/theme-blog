@@ -265,6 +265,14 @@ function attr(node, attribute, value) {
     else if (node.getAttribute(attribute) !== value)
         node.setAttribute(attribute, value);
 }
+/**
+ * List of attributes that should always be set through the attr method,
+ * because updating them through the property setter doesn't work reliably.
+ * In the example of `width`/`height`, the problem is that the setter only
+ * accepts numeric values, but the attribute can also be set to a string like `50%`.
+ * If this list becomes too big, rethink this approach.
+ */
+const always_set_through_set_attribute = ['width', 'height'];
 function set_attributes(node, attributes) {
     // @ts-ignore
     const descriptors = Object.getOwnPropertyDescriptors(node.__proto__);
@@ -278,7 +286,7 @@ function set_attributes(node, attributes) {
         else if (key === '__value') {
             node.value = node[key] = attributes[key];
         }
-        else if (descriptors[key] && descriptors[key].set) {
+        else if (descriptors[key] && descriptors[key].set && always_set_through_set_attribute.indexOf(key) === -1) {
             node[key] = attributes[key];
         }
         else {
@@ -1060,11 +1068,11 @@ function create_fragment(ctx) {
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
-			t = text("/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 900px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: clamp(2rem, 10vw, 3rem);\n  line-height: 1.1;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n\n  /* Base values */\n  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);\n  --border-radius: 0;\n  --border-color: #e0e1e1;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: system-ui, sans-serif;\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: 2.5rem;\n  line-height: 1.15;\n  font-weight: 500;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Content Section */\n.content {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 3rem 2rem;\n}\n.content p {\n    margin-bottom: 1rem;\n    line-height: 1.5;\n  }\n.content img {\n    width: 100%;\n    margin: 2rem 0;\n    box-shadow: var(--box-shadow);\n    border-radius: var(--border-radius);\n  }\n.content a.link {\n    line-height: 1.3;\n    font-weight: 500;\n    border-bottom: 2px solid var(--color-accent);\n    transform: translateY(-2px); /* move link back into place */\n    transition: var(--transition, 0.1s border);\n  }\n.content a.link:hover {\n      border-color: transparent;\n    }\n.content h1 {\n    font-size: 3rem;\n    font-weight: 500;\n    line-height: 1.1;\n    margin-bottom: 1.5rem;\n  }\n.content h2 {\n    font-size: 2.5rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content h3 {\n    font-size: 2rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content ul {\n    list-style: disc;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content ol {\n    list-style: decimal;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content blockquote {\n    padding: 2rem;\n    margin-top: 1.5rem;\n    margin-bottom: 1.5rem;\n    border-left: 5px solid var(--color-accent);\n  }");
+			t = text("/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: black;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 800px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1150px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: clamp(2rem, 10vw, 3rem);\n  line-height: 1.1;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 1px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0; /* reset */\n  border-radius: 0.25rem;\n  font-size: 1rem;\n}\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n\n  /* Base values */\n  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);\n  --border-radius: 0;\n  --border-color: #e0e1e1;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: system-ui, sans-serif;\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: 2.5rem;\n  line-height: 1.15;\n  font-weight: 500;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Content Section */\n.content {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 3rem 2rem;\n}\n.content p {\n    margin-bottom: 1rem;\n    line-height: 1.5;\n  }\n.content img {\n    width: 100%;\n    margin: 2rem 0;\n    box-shadow: var(--box-shadow);\n    border-radius: var(--border-radius);\n  }\n.content a.link {\n    line-height: 1.3;\n    font-weight: 500;\n    border-bottom: 2px solid var(--color-accent);\n    transform: translateY(-2px); /* move link back into place */\n    transition: var(--transition, 0.1s border);\n  }\n.content a.link:hover {\n      border-color: transparent;\n    }\n.content h1 {\n    font-size: 3rem;\n    font-weight: 500;\n    line-height: 1.1;\n    margin-bottom: 1.5rem;\n  }\n.content h2 {\n    font-size: 2.5rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content h3 {\n    font-size: 2rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content ul {\n    list-style: disc;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content ol {\n    list-style: decimal;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content blockquote {\n    padding: 2rem;\n    margin-top: 1.5rem;\n    margin-bottom: 1.5rem;\n    border-left: 5px solid var(--color-accent);\n  }");
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-pzd9h4', document.head);
+			const head_nodes = head_selector('svelte-1xl12bc', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1080,7 +1088,7 @@ function create_fragment(ctx) {
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
 			var style_nodes = children(style);
-			t = claim_text(style_nodes, "/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 900px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: clamp(2rem, 10vw, 3rem);\n  line-height: 1.1;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n\n  /* Base values */\n  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);\n  --border-radius: 0;\n  --border-color: #e0e1e1;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: system-ui, sans-serif;\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: 2.5rem;\n  line-height: 1.15;\n  font-weight: 500;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Content Section */\n.content {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 3rem 2rem;\n}\n.content p {\n    margin-bottom: 1rem;\n    line-height: 1.5;\n  }\n.content img {\n    width: 100%;\n    margin: 2rem 0;\n    box-shadow: var(--box-shadow);\n    border-radius: var(--border-radius);\n  }\n.content a.link {\n    line-height: 1.3;\n    font-weight: 500;\n    border-bottom: 2px solid var(--color-accent);\n    transform: translateY(-2px); /* move link back into place */\n    transition: var(--transition, 0.1s border);\n  }\n.content a.link:hover {\n      border-color: transparent;\n    }\n.content h1 {\n    font-size: 3rem;\n    font-weight: 500;\n    line-height: 1.1;\n    margin-bottom: 1.5rem;\n  }\n.content h2 {\n    font-size: 2.5rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content h3 {\n    font-size: 2rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content ul {\n    list-style: disc;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content ol {\n    list-style: decimal;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content blockquote {\n    padding: 2rem;\n    margin-top: 1.5rem;\n    margin-bottom: 1.5rem;\n    border-left: 5px solid var(--color-accent);\n  }");
+			t = claim_text(style_nodes, "/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: black;\n  --color-accent2: #999999;\n  --color-shade: #2d3339;\n\n  --inner-max-width: 800px;\n\n  /* Base values */\n  --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n  --border-radius: 2px;\n  --border-color: #e0e1e1;\n  --body-font: \"Merriweather\", serif;\n  --heading-font: \"Inter\", sans-serif;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: var(--heading-font);\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1150px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: clamp(2rem, 10vw, 3rem);\n  line-height: 1.1;\n  font-weight: 600;\n  letter-spacing: -0.15rem;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 1px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0; /* reset */\n  border-radius: 0.25rem;\n  font-size: 1rem;\n}\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Reset & standardize default styles */\n@import url(\"https://unpkg.com/@primo-app/primo@1.3.64/reset.css\") layer;\n\n/* Design tokens (apply to components) */\n:root {\n  /* Custom theme options */\n  --color-accent: #004700;\n\n  /* Base values */\n  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);\n  --border-radius: 0;\n  --border-color: #e0e1e1;\n}\n\n/* Root element (use instead of `body`) */\n#page {\n  font-family: system-ui, sans-serif;\n  color: #111;\n  line-height: 1.5;\n  font-size: 1.125rem;\n  background: white;\n}\n\n/* Elements */\n.section-container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 5rem 2rem;\n}\n\na.link {\n  line-height: 1.3;\n\n  border-bottom: 2px solid var(--color-accent);\n  transform: translateY(-2px); /* move link back into place */\n  transition: var(--transition, 0.1s border);\n}\n\na.link:hover {\n    border-color: transparent;\n  }\n\n.heading {\n  font-size: 2.5rem;\n  line-height: 1.15;\n  font-weight: 500;\n}\n\n.button {\n  color: white;\n  background: var(--color-accent, rebeccapurple);\n  border-radius: 0;\n  padding: 18px 24px;\n  transition: var(--transition, 0.1s box-shadow);\n  border: 0;\n}\n\n/* reset */\n\n.button:hover {\n    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);\n  }\n\n.button.inverted {\n    background: transparent;\n    color: var(--color-accent, rebeccapurple);\n  }\n\n/* Content Section */\n.content {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 3rem 2rem;\n}\n.content p {\n    margin-bottom: 1rem;\n    line-height: 1.5;\n  }\n.content img {\n    width: 100%;\n    margin: 2rem 0;\n    box-shadow: var(--box-shadow);\n    border-radius: var(--border-radius);\n  }\n.content a.link {\n    line-height: 1.3;\n    font-weight: 500;\n    border-bottom: 2px solid var(--color-accent);\n    transform: translateY(-2px); /* move link back into place */\n    transition: var(--transition, 0.1s border);\n  }\n.content a.link:hover {\n      border-color: transparent;\n    }\n.content h1 {\n    font-size: 3rem;\n    font-weight: 500;\n    line-height: 1.1;\n    margin-bottom: 1.5rem;\n  }\n.content h2 {\n    font-size: 2.5rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content h3 {\n    font-size: 2rem;\n    font-weight: 500;\n    margin-bottom: 1rem;\n  }\n.content ul {\n    list-style: disc;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content ol {\n    list-style: decimal;\n    padding: 0.5rem 0;\n    padding-left: 1.25rem;\n  }\n.content blockquote {\n    padding: 2rem;\n    margin-top: 1.5rem;\n    margin-bottom: 1.5rem;\n    border-left: 5px solid var(--color-accent);\n  }");
 			style_nodes.forEach(detach);
 			head_nodes.forEach(detach);
 			this.h();
@@ -3711,25 +3719,214 @@ class Component$2 extends SvelteComponent {
 
 /* generated by Svelte v3.58.0 */
 
+function get_each_context$1(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[6] = list[i];
+	child_ctx[8] = i;
+	return child_ctx;
+}
+
+// (89:10) {#if item.thumbnail.url}
+function create_if_block$3(ctx) {
+	let img;
+	let img_data_key_value;
+	let img_src_value;
+	let img_alt_value;
+
+	return {
+		c() {
+			img = element("img");
+			this.h();
+		},
+		l(nodes) {
+			img = claim_element(nodes, "IMG", {
+				"data-key": true,
+				src: true,
+				alt: true,
+				class: true
+			});
+
+			this.h();
+		},
+		h() {
+			attr(img, "data-key", img_data_key_value = "items[" + /*i*/ ctx[8] + "].thumbnail");
+			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[6].thumbnail.url)) attr(img, "src", img_src_value);
+			attr(img, "alt", img_alt_value = /*item*/ ctx[6].thumbnail.alt);
+			attr(img, "class", "svelte-cex2al");
+		},
+		m(target, anchor) {
+			insert_hydration(target, img, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*items*/ 2 && !src_url_equal(img.src, img_src_value = /*item*/ ctx[6].thumbnail.url)) {
+				attr(img, "src", img_src_value);
+			}
+
+			if (dirty & /*items*/ 2 && img_alt_value !== (img_alt_value = /*item*/ ctx[6].thumbnail.alt)) {
+				attr(img, "alt", img_alt_value);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(img);
+		}
+	};
+}
+
+// (82:6) {#each items as item, i}
+function create_each_block$1(ctx) {
+	let li;
+	let div1;
+	let a;
+	let t0_value = /*item*/ ctx[6].link.label + "";
+	let t0;
+	let a_data_key_value;
+	let a_href_value;
+	let t1;
+	let div0;
+	let raw_value = /*item*/ ctx[6].description.html + "";
+	let div0_data_key_value;
+	let t2;
+	let span;
+	let t3_value = /*item*/ ctx[6].date + "";
+	let t3;
+	let span_data_key_value;
+	let t4;
+	let t5;
+	let if_block = /*item*/ ctx[6].thumbnail.url && create_if_block$3(ctx);
+
+	return {
+		c() {
+			li = element("li");
+			div1 = element("div");
+			a = element("a");
+			t0 = text(t0_value);
+			t1 = space();
+			div0 = element("div");
+			t2 = space();
+			span = element("span");
+			t3 = text(t3_value);
+			t4 = space();
+			if (if_block) if_block.c();
+			t5 = space();
+			this.h();
+		},
+		l(nodes) {
+			li = claim_element(nodes, "LI", { class: true });
+			var li_nodes = children(li);
+			div1 = claim_element(li_nodes, "DIV", { class: true });
+			var div1_nodes = children(div1);
+
+			a = claim_element(div1_nodes, "A", {
+				"data-key": true,
+				class: true,
+				href: true
+			});
+
+			var a_nodes = children(a);
+			t0 = claim_text(a_nodes, t0_value);
+			a_nodes.forEach(detach);
+			t1 = claim_space(div1_nodes);
+			div0 = claim_element(div1_nodes, "DIV", { class: true, "data-key": true });
+			var div0_nodes = children(div0);
+			div0_nodes.forEach(detach);
+			t2 = claim_space(div1_nodes);
+			span = claim_element(div1_nodes, "SPAN", { class: true, "data-key": true });
+			var span_nodes = children(span);
+			t3 = claim_text(span_nodes, t3_value);
+			span_nodes.forEach(detach);
+			div1_nodes.forEach(detach);
+			t4 = claim_space(li_nodes);
+			if (if_block) if_block.l(li_nodes);
+			t5 = claim_space(li_nodes);
+			li_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(a, "data-key", a_data_key_value = "items[" + /*i*/ ctx[8] + "].link");
+			attr(a, "class", "title svelte-cex2al");
+			attr(a, "href", a_href_value = /*item*/ ctx[6].link.url);
+			attr(div0, "class", "description svelte-cex2al");
+			attr(div0, "data-key", div0_data_key_value = "items[" + /*i*/ ctx[8] + "].description");
+			attr(span, "class", "date svelte-cex2al");
+			attr(span, "data-key", span_data_key_value = "items[" + /*i*/ ctx[8] + "].date");
+			attr(div1, "class", "post-info");
+			attr(li, "class", "svelte-cex2al");
+		},
+		m(target, anchor) {
+			insert_hydration(target, li, anchor);
+			append_hydration(li, div1);
+			append_hydration(div1, a);
+			append_hydration(a, t0);
+			append_hydration(div1, t1);
+			append_hydration(div1, div0);
+			div0.innerHTML = raw_value;
+			append_hydration(div1, t2);
+			append_hydration(div1, span);
+			append_hydration(span, t3);
+			append_hydration(li, t4);
+			if (if_block) if_block.m(li, null);
+			append_hydration(li, t5);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*items*/ 2 && t0_value !== (t0_value = /*item*/ ctx[6].link.label + "")) set_data(t0, t0_value);
+
+			if (dirty & /*items*/ 2 && a_href_value !== (a_href_value = /*item*/ ctx[6].link.url)) {
+				attr(a, "href", a_href_value);
+			}
+
+			if (dirty & /*items*/ 2 && raw_value !== (raw_value = /*item*/ ctx[6].description.html + "")) div0.innerHTML = raw_value;			if (dirty & /*items*/ 2 && t3_value !== (t3_value = /*item*/ ctx[6].date + "")) set_data(t3, t3_value);
+
+			if (/*item*/ ctx[6].thumbnail.url) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+				} else {
+					if_block = create_if_block$3(ctx);
+					if_block.c();
+					if_block.m(li, t5);
+				}
+			} else if (if_block) {
+				if_block.d(1);
+				if_block = null;
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(li);
+			if (if_block) if_block.d();
+		}
+	};
+}
+
 function create_fragment$3(ctx) {
 	let div2;
 	let div1;
 	let section;
-	let img;
-	let img_src_value;
-	let img_alt_value;
-	let t;
 	let div0;
-	let raw_value = /*content*/ ctx[1].html + "";
+	let h2;
+	let t0;
+	let t1;
+	let ul;
+	let each_value = /*items*/ ctx[1];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+	}
 
 	return {
 		c() {
 			div2 = element("div");
 			div1 = element("div");
 			section = element("section");
-			img = element("img");
-			t = space();
 			div0 = element("div");
+			h2 = element("h2");
+			t0 = text(/*heading*/ ctx[0]);
+			t1 = space();
+			ul = element("ul");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
 			this.h();
 		},
 		l(nodes) {
@@ -3739,10 +3936,21 @@ function create_fragment$3(ctx) {
 			var div1_nodes = children(div1);
 			section = claim_element(div1_nodes, "SECTION", { class: true });
 			var section_nodes = children(section);
-			img = claim_element(section_nodes, "IMG", { src: true, alt: true });
-			t = claim_space(section_nodes);
 			div0 = claim_element(section_nodes, "DIV", { class: true });
 			var div0_nodes = children(div0);
+			h2 = claim_element(div0_nodes, "H2", { class: true });
+			var h2_nodes = children(h2);
+			t0 = claim_text(h2_nodes, /*heading*/ ctx[0]);
+			h2_nodes.forEach(detach);
+			t1 = claim_space(div0_nodes);
+			ul = claim_element(div0_nodes, "UL", { class: true });
+			var ul_nodes = children(ul);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(ul_nodes);
+			}
+
+			ul_nodes.forEach(detach);
 			div0_nodes.forEach(detach);
 			section_nodes.forEach(detach);
 			div1_nodes.forEach(detach);
@@ -3750,37 +3958,61 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		h() {
-			if (!src_url_equal(img.src, img_src_value = /*image*/ ctx[0].url)) attr(img, "src", img_src_value);
-			attr(img, "alt", img_alt_value = /*image*/ ctx[0].alt);
-			attr(div0, "class", "content svelte-g4ok1j");
-			attr(section, "class", "section-container svelte-g4ok1j");
+			attr(h2, "class", "svelte-cex2al");
+			attr(ul, "class", "items svelte-cex2al");
+			attr(div0, "class", "section-container svelte-cex2al");
+			attr(section, "class", "svelte-cex2al");
 			attr(div1, "class", "component");
 			attr(div2, "class", "section");
-			attr(div2, "id", "section-485436be-5de3-4be8-a93e-4cd22be80fed");
+			attr(div2, "id", "section-71b583d2-e0e7-4da5-8a6f-ff3f7f4fc064");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div2, anchor);
 			append_hydration(div2, div1);
 			append_hydration(div1, section);
-			append_hydration(section, img);
-			append_hydration(section, t);
 			append_hydration(section, div0);
-			div0.innerHTML = raw_value;
+			append_hydration(div0, h2);
+			append_hydration(h2, t0);
+			append_hydration(div0, t1);
+			append_hydration(div0, ul);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				if (each_blocks[i]) {
+					each_blocks[i].m(ul, null);
+				}
+			}
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*image*/ 1 && !src_url_equal(img.src, img_src_value = /*image*/ ctx[0].url)) {
-				attr(img, "src", img_src_value);
-			}
+			if (dirty & /*heading*/ 1) set_data(t0, /*heading*/ ctx[0]);
 
-			if (dirty & /*image*/ 1 && img_alt_value !== (img_alt_value = /*image*/ ctx[0].alt)) {
-				attr(img, "alt", img_alt_value);
-			}
+			if (dirty & /*items*/ 2) {
+				each_value = /*items*/ ctx[1];
+				let i;
 
-			if (dirty & /*content*/ 2 && raw_value !== (raw_value = /*content*/ ctx[1].html + "")) div0.innerHTML = raw_value;		},
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block$1(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(ul, null);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value.length;
+			}
+		},
 		i: noop,
 		o: noop,
 		d(detaching) {
 			if (detaching) detach(div2);
+			destroy_each(each_blocks, detaching);
 		}
 	};
 }
@@ -3790,17 +4022,19 @@ function instance$3($$self, $$props, $$invalidate) {
 	let { image } = $$props;
 	let { title } = $$props;
 	let { description } = $$props;
-	let { content } = $$props;
+	let { heading } = $$props;
+	let { items } = $$props;
 
 	$$self.$$set = $$props => {
 		if ('favicon' in $$props) $$invalidate(2, favicon = $$props.favicon);
-		if ('image' in $$props) $$invalidate(0, image = $$props.image);
-		if ('title' in $$props) $$invalidate(3, title = $$props.title);
-		if ('description' in $$props) $$invalidate(4, description = $$props.description);
-		if ('content' in $$props) $$invalidate(1, content = $$props.content);
+		if ('image' in $$props) $$invalidate(3, image = $$props.image);
+		if ('title' in $$props) $$invalidate(4, title = $$props.title);
+		if ('description' in $$props) $$invalidate(5, description = $$props.description);
+		if ('heading' in $$props) $$invalidate(0, heading = $$props.heading);
+		if ('items' in $$props) $$invalidate(1, items = $$props.items);
 	};
 
-	return [image, content, favicon, title, description];
+	return [heading, items, favicon, image, title, description];
 }
 
 class Component$3 extends SvelteComponent {
@@ -3809,17 +4043,335 @@ class Component$3 extends SvelteComponent {
 
 		init(this, options, instance$3, create_fragment$3, safe_not_equal, {
 			favicon: 2,
-			image: 0,
-			title: 3,
-			description: 4,
-			content: 1
+			image: 3,
+			title: 4,
+			description: 5,
+			heading: 0,
+			items: 1
 		});
 	}
 }
 
 /* generated by Svelte v3.58.0 */
 
+function get_each_context$2(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[7] = list[i].link;
+	child_ctx[8] = list[i].icon;
+	return child_ctx;
+}
+
+// (74:8) {#each social_links as {link, icon}}
+function create_each_block$2(ctx) {
+	let li;
+	let a;
+	let icon;
+	let a_href_value;
+	let a_aria_label_value;
+	let t;
+	let current;
+	icon = new Component$1({ props: { icon: /*icon*/ ctx[8] } });
+
+	return {
+		c() {
+			li = element("li");
+			a = element("a");
+			create_component(icon.$$.fragment);
+			t = space();
+			this.h();
+		},
+		l(nodes) {
+			li = claim_element(nodes, "LI", {});
+			var li_nodes = children(li);
+
+			a = claim_element(li_nodes, "A", {
+				href: true,
+				"aria-label": true,
+				class: true
+			});
+
+			var a_nodes = children(a);
+			claim_component(icon.$$.fragment, a_nodes);
+			a_nodes.forEach(detach);
+			t = claim_space(li_nodes);
+			li_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(a, "href", a_href_value = /*link*/ ctx[7].url);
+			attr(a, "aria-label", a_aria_label_value = /*icon*/ ctx[8]);
+			attr(a, "class", "svelte-1excgdw");
+		},
+		m(target, anchor) {
+			insert_hydration(target, li, anchor);
+			append_hydration(li, a);
+			mount_component(icon, a, null);
+			append_hydration(li, t);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const icon_changes = {};
+			if (dirty & /*social_links*/ 1) icon_changes.icon = /*icon*/ ctx[8];
+			icon.$set(icon_changes);
+
+			if (!current || dirty & /*social_links*/ 1 && a_href_value !== (a_href_value = /*link*/ ctx[7].url)) {
+				attr(a, "href", a_href_value);
+			}
+
+			if (!current || dirty & /*social_links*/ 1 && a_aria_label_value !== (a_aria_label_value = /*icon*/ ctx[8])) {
+				attr(a, "aria-label", a_aria_label_value);
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(icon.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(icon.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(li);
+			destroy_component(icon);
+		}
+	};
+}
+
+function create_fragment$4(ctx) {
+	let div3;
+	let div2;
+	let footer;
+	let div1;
+	let hr;
+	let t0;
+	let div0;
+	let span0;
+	let t1;
+	let t2_value = new Date().getFullYear() + "";
+	let t2;
+	let t3;
+	let span1;
+	let a;
+	let t4;
+	let t5;
+	let t6;
+	let ul;
+	let current;
+	let each_value = /*social_links*/ ctx[0];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+	}
+
+	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+		each_blocks[i] = null;
+	});
+
+	return {
+		c() {
+			div3 = element("div");
+			div2 = element("div");
+			footer = element("footer");
+			div1 = element("div");
+			hr = element("hr");
+			t0 = space();
+			div0 = element("div");
+			span0 = element("span");
+			t1 = text("Copyright ");
+			t2 = text(t2_value);
+			t3 = space();
+			span1 = element("span");
+			a = element("a");
+			t4 = text("Primo");
+			t5 = text(" Powered");
+			t6 = space();
+			ul = element("ul");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			this.h();
+		},
+		l(nodes) {
+			div3 = claim_element(nodes, "DIV", { class: true, id: true });
+			var div3_nodes = children(div3);
+			div2 = claim_element(div3_nodes, "DIV", { class: true });
+			var div2_nodes = children(div2);
+			footer = claim_element(div2_nodes, "FOOTER", {});
+			var footer_nodes = children(footer);
+			div1 = claim_element(footer_nodes, "DIV", { class: true });
+			var div1_nodes = children(div1);
+			hr = claim_element(div1_nodes, "HR", { class: true });
+			t0 = claim_space(div1_nodes);
+			div0 = claim_element(div1_nodes, "DIV", { class: true });
+			var div0_nodes = children(div0);
+			span0 = claim_element(div0_nodes, "SPAN", { class: true });
+			var span0_nodes = children(span0);
+			t1 = claim_text(span0_nodes, "Copyright ");
+			t2 = claim_text(span0_nodes, t2_value);
+			span0_nodes.forEach(detach);
+			t3 = claim_space(div0_nodes);
+			span1 = claim_element(div0_nodes, "SPAN", { class: true });
+			var span1_nodes = children(span1);
+			a = claim_element(span1_nodes, "A", { href: true, class: true });
+			var a_nodes = children(a);
+			t4 = claim_text(a_nodes, "Primo");
+			a_nodes.forEach(detach);
+			t5 = claim_text(span1_nodes, " Powered");
+			span1_nodes.forEach(detach);
+			t6 = claim_space(div0_nodes);
+			ul = claim_element(div0_nodes, "UL", { class: true });
+			var ul_nodes = children(ul);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(ul_nodes);
+			}
+
+			ul_nodes.forEach(detach);
+			div0_nodes.forEach(detach);
+			div1_nodes.forEach(detach);
+			footer_nodes.forEach(detach);
+			div2_nodes.forEach(detach);
+			div3_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(hr, "class", "svelte-1excgdw");
+			attr(span0, "class", "copyright svelte-1excgdw");
+			attr(a, "href", "https://primo.so");
+			attr(a, "class", "svelte-1excgdw");
+			attr(span1, "class", "primo svelte-1excgdw");
+			attr(ul, "class", "svelte-1excgdw");
+			attr(div0, "class", "footer svelte-1excgdw");
+			attr(div1, "class", "section-container svelte-1excgdw");
+			attr(div2, "class", "component");
+			attr(div3, "class", "section");
+			attr(div3, "id", "section-5b3c51ea-b303-4d79-bacc-69d8f96007dd");
+		},
+		m(target, anchor) {
+			insert_hydration(target, div3, anchor);
+			append_hydration(div3, div2);
+			append_hydration(div2, footer);
+			append_hydration(footer, div1);
+			append_hydration(div1, hr);
+			append_hydration(div1, t0);
+			append_hydration(div1, div0);
+			append_hydration(div0, span0);
+			append_hydration(span0, t1);
+			append_hydration(span0, t2);
+			append_hydration(div0, t3);
+			append_hydration(div0, span1);
+			append_hydration(span1, a);
+			append_hydration(a, t4);
+			append_hydration(span1, t5);
+			append_hydration(div0, t6);
+			append_hydration(div0, ul);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				if (each_blocks[i]) {
+					each_blocks[i].m(ul, null);
+				}
+			}
+
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (dirty & /*social_links*/ 1) {
+				each_value = /*social_links*/ ctx[0];
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context$2(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+						transition_in(each_blocks[i], 1);
+					} else {
+						each_blocks[i] = create_each_block$2(child_ctx);
+						each_blocks[i].c();
+						transition_in(each_blocks[i], 1);
+						each_blocks[i].m(ul, null);
+					}
+				}
+
+				group_outros();
+
+				for (i = each_value.length; i < each_blocks.length; i += 1) {
+					out(i);
+				}
+
+				check_outros();
+			}
+		},
+		i(local) {
+			if (current) return;
+
+			for (let i = 0; i < each_value.length; i += 1) {
+				transition_in(each_blocks[i]);
+			}
+
+			current = true;
+		},
+		o(local) {
+			each_blocks = each_blocks.filter(Boolean);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				transition_out(each_blocks[i]);
+			}
+
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(div3);
+			destroy_each(each_blocks, detaching);
+		}
+	};
+}
+
 function instance$4($$self, $$props, $$invalidate) {
+	let { favicon } = $$props;
+	let { image } = $$props;
+	let { title } = $$props;
+	let { description } = $$props;
+	let { heading } = $$props;
+	let { email } = $$props;
+	let { social_links } = $$props;
+
+	$$self.$$set = $$props => {
+		if ('favicon' in $$props) $$invalidate(1, favicon = $$props.favicon);
+		if ('image' in $$props) $$invalidate(2, image = $$props.image);
+		if ('title' in $$props) $$invalidate(3, title = $$props.title);
+		if ('description' in $$props) $$invalidate(4, description = $$props.description);
+		if ('heading' in $$props) $$invalidate(5, heading = $$props.heading);
+		if ('email' in $$props) $$invalidate(6, email = $$props.email);
+		if ('social_links' in $$props) $$invalidate(0, social_links = $$props.social_links);
+	};
+
+	return [social_links, favicon, image, title, description, heading, email];
+}
+
+class Component$4 extends SvelteComponent {
+	constructor(options) {
+		super();
+
+		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+			favicon: 1,
+			image: 2,
+			title: 3,
+			description: 4,
+			heading: 5,
+			email: 6,
+			social_links: 0
+		});
+	}
+}
+
+/* generated by Svelte v3.58.0 */
+
+function instance$5($$self, $$props, $$invalidate) {
 	let { favicon } = $$props;
 	let { image } = $$props;
 	let { title } = $$props;
@@ -3835,11 +4387,11 @@ function instance$4($$self, $$props, $$invalidate) {
 	return [favicon, image, title, description];
 }
 
-class Component$4 extends SvelteComponent {
+class Component$5 extends SvelteComponent {
 	constructor(options) {
 		super();
 
-		init(this, options, instance$4, null, safe_not_equal, {
+		init(this, options, instance$5, null, safe_not_equal, {
 			favicon: 0,
 			image: 1,
 			title: 2,
@@ -3850,7 +4402,7 @@ class Component$4 extends SvelteComponent {
 
 /* generated by Svelte v3.58.0 */
 
-function create_fragment$4(ctx) {
+function create_fragment$5(ctx) {
 	let component_0;
 	let t0;
 	let component_1;
@@ -3858,6 +4410,8 @@ function create_fragment$4(ctx) {
 	let component_2;
 	let t2;
 	let component_3;
+	let t3;
+	let component_4;
 	let current;
 
 	component_0 = new Component({
@@ -3867,7 +4421,7 @@ function create_fragment$4(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Mission",
+				title: "Blog",
 				description: ""
 			}
 		});
@@ -3879,7 +4433,7 @@ function create_fragment$4(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Mission",
+				title: "Blog",
 				description: "",
 				logo: {
 					"image": {
@@ -3893,21 +4447,18 @@ function create_fragment$4(ctx) {
 				site_nav: [
 					{
 						"link": {
-							"url": "http://localhost:5173/",
+							"url": "http://localhost:5173/theme-blog",
 							"label": "Home"
 						}
 					},
 					{
 						"link": {
-							"url": "http://localhost:5173/article-list",
+							"url": "http://localhost:5173/about",
 							"label": "About"
 						}
 					},
 					{
-						"link": {
-							"url": "http://localhost:5173/article-list",
-							"label": "Blog"
-						}
+						"link": { "url": "/blog", "label": "Blog" }
 					}
 				]
 			}
@@ -3919,18 +4470,81 @@ function create_fragment$4(ctx) {
 					"alt": "",
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
-				image: {
-					"alt": "",
-					"src": "https://images.unsplash.com/photo-1569412148958-600837f89a65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJlZSUyMGJsYWNrJTIwYW5kJTIwd2hpdGV8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-					"url": "https://images.unsplash.com/photo-1569412148958-600837f89a65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJlZSUyMGJsYWNrJTIwYW5kJTIwd2hpdGV8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-					"size": null
-				},
-				title: "Mission",
+				image: { "alt": "", "url": "" },
+				title: "Blog",
 				description: "",
-				content: {
-					"html": "<h1>From the Amazon to beyond</h1><p>Sit enim Lorem dolor aliquip ut consequat cillum anim consectetur aliqua deserunt. Est ad magna exercitation pariatur reprehenderit anim adipisicing aute dolor dolore adipisicing.</p><p>Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Enim tortor at auctor urna nunc id cursus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Ornare quam viverra orci sagittis eu volutpat.</p>",
-					"markdown": "# From the Amazon to beyond\n\nSit enim Lorem dolor aliquip ut consequat cillum anim consectetur aliqua deserunt. Est ad magna exercitation pariatur reprehenderit anim adipisicing aute dolor dolore adipisicing.\n\nSed adipiscing diam donec adipiscing tristique risus nec feugiat in. Enim tortor at auctor urna nunc id cursus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Ornare quam viverra orci sagittis eu volutpat.\n\n"
-				}
+				heading: "All Articles",
+				items: [
+					{
+						"date": "June 3, 2023",
+						"link": {
+							"url": "/blog-entry",
+							"label": "Mastering the art of responsive design: a comprehensive guide"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.</p>",
+							"markdown": "This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.\n\n"
+						}
+					},
+					{
+						"date": "August 12, 2023",
+						"link": {
+							"url": "/blog-entry",
+							"label": "10 essential tools every web developer should know"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2371&q=80",
+							"url": "https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2371&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.</p>",
+							"markdown": "Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.\n\n"
+						}
+					},
+					{
+						"date": "September 12, 2023",
+						"link": {
+							"url": "/blog-entry",
+							"label": "The future of web design: exploring innovative trends & technologies"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"url": "https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry.</p>",
+							"markdown": "Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry."
+						}
+					},
+					{
+						"date": "December 12, 2023",
+						"link": {
+							"url": "/blog-entry",
+							"label": "The Power of Minimalism in UI/UX Design",
+							"active": false
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2313&q=80",
+							"url": "https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2313&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics.</p>",
+							"markdown": "Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics."
+						}
+					}
+				]
 			}
 		});
 
@@ -3941,7 +4555,39 @@ function create_fragment$4(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Mission",
+				title: "Blog",
+				description: "",
+				heading: "",
+				email: "",
+				social_links: [
+					{
+						"icon": "mdi:twitter",
+						"link": {
+							"url": "https://twitter.com",
+							"label": "Twitter",
+							"active": false
+						}
+					},
+					{
+						"icon": "mdi:github",
+						"link": {
+							"url": "https://github.com",
+							"label": "Github",
+							"active": false
+						}
+					}
+				]
+			}
+		});
+
+	component_4 = new Component$5({
+			props: {
+				favicon: {
+					"alt": "",
+					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+				},
+				image: { "alt": "", "url": "" },
+				title: "Blog",
 				description: ""
 			}
 		});
@@ -3955,6 +4601,8 @@ function create_fragment$4(ctx) {
 			create_component(component_2.$$.fragment);
 			t2 = space();
 			create_component(component_3.$$.fragment);
+			t3 = space();
+			create_component(component_4.$$.fragment);
 		},
 		l(nodes) {
 			claim_component(component_0.$$.fragment, nodes);
@@ -3964,6 +4612,8 @@ function create_fragment$4(ctx) {
 			claim_component(component_2.$$.fragment, nodes);
 			t2 = claim_space(nodes);
 			claim_component(component_3.$$.fragment, nodes);
+			t3 = claim_space(nodes);
+			claim_component(component_4.$$.fragment, nodes);
 		},
 		m(target, anchor) {
 			mount_component(component_0, target, anchor);
@@ -3973,6 +4623,8 @@ function create_fragment$4(ctx) {
 			mount_component(component_2, target, anchor);
 			insert_hydration(target, t2, anchor);
 			mount_component(component_3, target, anchor);
+			insert_hydration(target, t3, anchor);
+			mount_component(component_4, target, anchor);
 			current = true;
 		},
 		p: noop,
@@ -3982,6 +4634,7 @@ function create_fragment$4(ctx) {
 			transition_in(component_1.$$.fragment, local);
 			transition_in(component_2.$$.fragment, local);
 			transition_in(component_3.$$.fragment, local);
+			transition_in(component_4.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
@@ -3989,6 +4642,7 @@ function create_fragment$4(ctx) {
 			transition_out(component_1.$$.fragment, local);
 			transition_out(component_2.$$.fragment, local);
 			transition_out(component_3.$$.fragment, local);
+			transition_out(component_4.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
@@ -3999,15 +4653,17 @@ function create_fragment$4(ctx) {
 			destroy_component(component_2, detaching);
 			if (detaching) detach(t2);
 			destroy_component(component_3, detaching);
+			if (detaching) detach(t3);
+			destroy_component(component_4, detaching);
 		}
 	};
 }
 
-class Component$5 extends SvelteComponent {
+class Component$6 extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, null, create_fragment$4, safe_not_equal, {});
+		init(this, options, null, create_fragment$5, safe_not_equal, {});
 	}
 }
 
-export default Component$5;
+export default Component$6;
