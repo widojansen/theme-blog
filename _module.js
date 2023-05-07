@@ -4531,7 +4531,7 @@ function create_fragment$5(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "",
+				title: "Blog",
 				description: ""
 			}
 		});
@@ -4543,7 +4543,7 @@ function create_fragment$5(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "",
+				title: "Blog",
 				description: "",
 				logo: {
 					"image": {
@@ -4581,14 +4581,14 @@ function create_fragment$5(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "",
+				title: "Blog",
 				description: "",
 				heading: "FEATURED POSTS",
 				items: [
 					{
 						"date": "June 3, 2023",
 						"link": {
-							"url": "/blog-entry",
+							"url": "http://localhost:5173/blog-entry",
 							"label": "Mastering the art of responsive design: a comprehensive guide"
 						},
 						"thumbnail": {
@@ -4665,7 +4665,7 @@ function create_fragment$5(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "",
+				title: "Blog",
 				description: "",
 				heading: "",
 				email: "",
@@ -4697,7 +4697,7 @@ function create_fragment$5(ctx) {
 					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
 				},
 				image: { "alt": "", "url": "" },
-				title: "",
+				title: "Blog",
 				description: ""
 			}
 		});
