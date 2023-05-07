@@ -4550,17 +4550,9 @@ function create_fragment$7(ctx) {
 					"title": "Corta"
 				},
 				site_nav: [
+					{ "link": { "url": "/", "label": "Home" } },
 					{
-						"link": {
-							"url": "http://localhost:5173/theme-blog",
-							"label": "Home"
-						}
-					},
-					{
-						"link": {
-							"url": "http://localhost:5173/about",
-							"label": "About"
-						}
+						"link": { "url": "/about", "label": "About" }
 					},
 					{
 						"link": { "url": "/blog", "label": "Blog" }

@@ -4555,17 +4555,9 @@ function create_fragment$5(ctx) {
 					"title": "Corta"
 				},
 				site_nav: [
+					{ "link": { "url": "/", "label": "Home" } },
 					{
-						"link": {
-							"url": "http://localhost:5173/theme-blog",
-							"label": "Home"
-						}
-					},
-					{
-						"link": {
-							"url": "http://localhost:5173/about",
-							"label": "About"
-						}
+						"link": { "url": "/about", "label": "About" }
 					},
 					{
 						"link": { "url": "/blog", "label": "Blog" }
@@ -4588,7 +4580,7 @@ function create_fragment$5(ctx) {
 					{
 						"date": "June 3, 2023",
 						"link": {
-							"url": "http://localhost:5173/blog-entry",
+							"url": "/blog-entry",
 							"label": "Mastering the art of responsive design: a comprehensive guide"
 						},
 						"thumbnail": {
