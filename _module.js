@@ -3852,7 +3852,7 @@ function create_if_block_1$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "graphic left svelte-755yc1");
+			attr(div, "class", "graphic left svelte-tfbk0x");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -3866,7 +3866,7 @@ function create_if_block_1$3(ctx) {
 	};
 }
 
-// (140:2) {#if graphics.right}
+// (154:2) {#if graphics.right}
 function create_if_block$3(ctx) {
 	let div;
 	let raw_value = /*graphics*/ ctx[2].right + "";
@@ -3883,7 +3883,7 @@ function create_if_block$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "graphic right svelte-755yc1");
+			attr(div, "class", "graphic right svelte-tfbk0x");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -3980,16 +3980,16 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h1, "class", "headline svelte-755yc1");
+			attr(h1, "class", "headline svelte-tfbk0x");
 			attr(input, "name", "email");
 			attr(input, "type", "text");
 			attr(input, "placeholder", input_placeholder_value = /*form*/ ctx[1].placeholder);
-			attr(input, "class", "svelte-755yc1");
-			attr(label, "class", "svelte-755yc1");
-			attr(button, "class", "button svelte-755yc1");
+			attr(input, "class", "svelte-tfbk0x");
+			attr(label, "class", "svelte-tfbk0x");
+			attr(button, "class", "button svelte-tfbk0x");
 			attr(button, "type", "submit");
-			attr(form_1, "class", "svelte-755yc1");
-			attr(section, "class", "section-container svelte-755yc1");
+			attr(form_1, "class", "svelte-tfbk0x");
+			attr(section, "class", "section-container svelte-tfbk0x");
 			attr(div0, "class", "component");
 			attr(div1, "class", "section");
 			attr(div1, "id", "section-63754163-a178-485f-85fd-86b46c47a959");

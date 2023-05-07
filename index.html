@@ -167,7 +167,7 @@
             top: 1rem
         }
 
-        .section-container.svelte-755yc1.svelte-755yc1 {
+        .section-container.svelte-tfbk0x.svelte-tfbk0x {
             display: grid;
             gap: 3.5rem;
             max-width: var(--inner-max-width);
@@ -175,7 +175,7 @@
             position: relative
         }
 
-        .headline.svelte-755yc1.svelte-755yc1 {
+        .headline.svelte-tfbk0x.svelte-tfbk0x {
             font-size: clamp(2rem, 10vw, 5rem);
             line-height: 1;
             letter-spacing: -0.04rem;
@@ -186,7 +186,7 @@
             z-index: 1
         }
 
-        form.svelte-755yc1.svelte-755yc1 {
+        form.svelte-tfbk0x.svelte-tfbk0x {
             display: flex;
             flex-wrap: wrap;
             gap: 0.3rem;
@@ -196,11 +196,11 @@
             z-index: 1
         }
 
-        form.svelte-755yc1 label.svelte-755yc1 {
+        form.svelte-tfbk0x label.svelte-tfbk0x {
             flex: 1
         }
 
-        form.svelte-755yc1 label input.svelte-755yc1 {
+        form.svelte-tfbk0x label input.svelte-tfbk0x {
             width: 100%;
             padding: 0.4rem 0.75rem;
             outline-color: transparent;
@@ -210,45 +210,60 @@
             border-radius: 0.25rem
         }
 
-        form.svelte-755yc1 label input.svelte-755yc1:focus {
+        form.svelte-tfbk0x label input.svelte-tfbk0x:focus {
             outline-color: var(--color-accent, rebeccapurple)
         }
 
-        .graphic.svelte-755yc1.svelte-755yc1 {
+        .graphic.svelte-tfbk0x.svelte-tfbk0x {
             position: absolute;
-            z-index: 0;
-            -webkit-animation: svelte-755yc1-float-in-space 10s infinite alternate;
-            animation: svelte-755yc1-float-in-space 10s infinite alternate
+            z-index: 0
         }
 
-        .graphic.left.svelte-755yc1.svelte-755yc1 {
-            bottom: 20%
+        .graphic.left.svelte-tfbk0x.svelte-tfbk0x {
+            bottom: 20%;
+            -webkit-animation: svelte-tfbk0x-left-float 10s infinite alternate;
+            animation: svelte-tfbk0x-left-float 10s infinite alternate
         }
 
-        .graphic.right.svelte-755yc1.svelte-755yc1 {
+        .graphic.right.svelte-tfbk0x.svelte-tfbk0x {
             top: -5%;
             right: 10%;
-            -webkit-animation-delay: 1s;
-            animation-delay: 1s;
-            animation-direction: alternate-reverse
+            -webkit-animation: svelte-tfbk0x-right-float 10s infinite alternate;
+            animation: svelte-tfbk0x-right-float 10s infinite alternate
         }
 
         @media(prefers-reduced-motion) {
-            .graphic.svelte-755yc1.svelte-755yc1 {
+            .graphic.svelte-tfbk0x.svelte-tfbk0x {
                 -webkit-animation: none;
                 animation: none
             }
         }
 
-        @-webkit-keyframes svelte-755yc1-float-in-space {
+        @-webkit-keyframes svelte-tfbk0x-left-float {
             to {
-                transform: translateY(10px)
+                rotate: 5deg;
+                transform: translateX(20px)
             }
         }
 
-        @keyframes svelte-755yc1-float-in-space {
+        @keyframes svelte-tfbk0x-left-float {
             to {
-                transform: translateY(10px)
+                rotate: 5deg;
+                transform: translateX(20px)
+            }
+        }
+
+        @-webkit-keyframes svelte-tfbk0x-right-float {
+            to {
+                rotate: -20deg;
+                transform: translateX(-20px)
+            }
+        }
+
+        @keyframes svelte-tfbk0x-right-float {
+            to {
+                rotate: -20deg;
+                transform: translateX(-20px)
             }
         }
 
@@ -403,12 +418,12 @@
     </div>
     <div class="section" id="section-63754163-a178-485f-85fd-86b46c47a959">
         <div class="component">
-            <section class="section-container svelte-755yc1">
-                <h1 class="headline svelte-755yc1">a blog about things I care about</h1>
-                <form class="svelte-755yc1"><label class="svelte-755yc1"><input name="email" type="text" placeholder="Email address" class="svelte-755yc1"></label>
-                    <button class="button svelte-755yc1" type="submit">Subscribe</button>
+            <section class="section-container svelte-tfbk0x">
+                <h1 class="headline svelte-tfbk0x">a blog about things I care about</h1>
+                <form class="svelte-tfbk0x"><label class="svelte-tfbk0x"><input name="email" type="text" placeholder="Email address" class="svelte-tfbk0x"></label>
+                    <button class="button svelte-tfbk0x" type="submit">Subscribe</button>
                 </form>
-                <div class="graphic left svelte-755yc1"><!-- HTML_TAG_START --><svg width="96" height="97" viewBox="0 0 96 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="graphic left svelte-tfbk0x"><!-- HTML_TAG_START --><svg width="96" height="97" viewBox="0 0 96 97" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M41.77 25.6934C42.2372 23.7604 42.3973 21.7632 42.2437 19.7796C41.9374 15.7928 40.3716 11.8749 37.5242 8.70007C30.7898 1.19149 19.4274 0.680531 12.1477 7.55891C4.86607 14.4389 4.42549 26.1019 11.1599 33.6103C13.9997 36.7766 17.6618 38.6978 21.4931 39.3478C23.4158 39.6724 25.3808 39.6776 27.306 39.3563" fill="#E1F4F9" />
                         <path d="M43.3261 22.0097C43.2758 23.3377 43.0931 24.6578 42.7794 25.9554L40.7604 25.4313C41.2017 23.6065 41.3519 21.7318 41.2068 19.8589C40.9053 15.9373 39.368 12.3282 36.7607 9.42138C33.6923 6.00021 29.5156 4.00437 25.0002 3.80132C20.4846 3.59826 16.171 5.21229 12.854 8.34632C6.00649 14.8164 5.58881 25.8261 11.9234 32.8887C14.5211 35.7851 17.8872 37.6543 21.6579 38.2941C23.4799 38.6018 25.3228 38.6045 27.1343 38.3023L27.4777 40.4107C25.4434 40.7501 23.3748 40.7471 21.3291 40.4016C17.0934 39.6829 13.3131 37.5839 10.3961 34.3316C3.28259 26.4002 3.7516 14.0369 11.4412 6.77126C15.1661 3.25178 20.0101 1.43929 25.0809 1.66732C30.1517 1.89535 34.8419 4.1368 38.2877 7.97853C41.2155 11.2429 42.9421 15.2963 43.2806 19.7007C43.3401 20.471 43.3553 21.2417 43.3261 22.0097Z" fill="#333333" />
                         <path d="M17.1008 8.59328C17.0882 8.92496 16.9258 9.24476 16.6359 9.44082C16.0266 9.85234 15.4434 10.3202 14.9026 10.8312C14.0163 11.6686 13.2454 12.6185 12.6111 13.6546C12.3061 14.153 11.664 14.3011 11.1772 13.9855C10.6904 13.6696 10.5432 13.0098 10.848 12.5115C11.58 11.3159 12.4687 10.2206 13.4897 9.25593C14.1126 8.66757 14.7843 8.12886 15.4866 7.65439C15.9656 7.33086 16.6112 7.4687 16.9284 7.96188C17.0535 8.1565 17.109 8.3775 17.1008 8.59328Z" fill="white" />
@@ -481,7 +496,7 @@
                         <path d="M8.59589 66.0799C8.57358 66.6664 8.09075 67.1211 7.51766 67.0954L3.0689 66.896C2.49581 66.8703 2.04916 66.374 2.07146 65.7875C2.09377 65.2011 2.5766 64.7464 3.14969 64.7721L7.59845 64.9714C8.17175 64.9971 8.61819 65.4935 8.59589 66.0799Z" fill="#FCBC1D" />
                         <path d="M6.46458 63.6899L6.29044 68.2716C6.26801 68.8618 5.78245 69.3194 5.20612 69.2936C4.62979 69.2677 4.1806 68.7682 4.20304 68.178L4.37717 63.5963C4.3996 63.0061 4.88516 62.5484 5.46149 62.5743C6.03783 62.6001 6.48702 63.0995 6.46458 63.6899Z" fill="#FCBC1D" />
                     </svg><!-- HTML_TAG_END --></div>
-                <div class="graphic right svelte-755yc1"><!-- HTML_TAG_START --><svg width="119" height="124" viewBox="0 0 119 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="graphic right svelte-tfbk0x"><!-- HTML_TAG_START --><svg width="119" height="124" viewBox="0 0 119 124" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M117.719 74.7005L108.587 65.2813L97.1101 77.1182L106.243 86.5375L117.719 74.7005Z" fill="#FCBC1D" />
                         <path d="M99.4561 55.8633L108.587 65.2809L97.11 77.1183L87.9792 67.7004L89.4651 66.1679L99.4561 55.8633Z" fill="#FCBC1D" />
                         <path d="M56.3205 11.3728L65.4512 20.7904L55.4605 31.0952L53.9746 32.6277L44.8436 23.2102L56.3205 11.3728Z" fill="#FCBC1D" />
