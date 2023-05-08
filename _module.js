@@ -8628,7 +8628,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "June 3, 2023",
 						"link": {
-							"url": "http://localhost:5173/blog-entry",
+							"url": "/blog-entry",
 							"label": "Mastering the art of responsive design: a comprehensive guide"
 						},
 						"thumbnail": {
@@ -8645,7 +8645,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "August 12, 2023",
 						"link": {
-							"url": "/blog-entry",
+							"url": "http://localhost:5173/blog-entry",
 							"label": "10 essential tools every web developer should know"
 						},
 						"thumbnail": {
@@ -8662,7 +8662,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "September 12, 2023",
 						"link": {
-							"url": "/blog-entry",
+							"url": "http://localhost:5173/blog-entry",
 							"label": "The future of web design: exploring innovative trends & technologies"
 						},
 						"thumbnail": {
@@ -8679,9 +8679,8 @@ function create_fragment$6(ctx) {
 					{
 						"date": "December 12, 2023",
 						"link": {
-							"url": "/blog-entry",
-							"label": "The Power of Minimalism in UI/UX Design",
-							"active": false
+							"url": "http://localhost:5173/blog-entry",
+							"label": "The Power of Minimalism in UI/UX Design"
 						},
 						"thumbnail": {
 							"alt": "",
