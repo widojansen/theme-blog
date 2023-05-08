@@ -272,14 +272,6 @@ function attr(node, attribute, value) {
     else if (node.getAttribute(attribute) !== value)
         node.setAttribute(attribute, value);
 }
-/**
- * List of attributes that should always be set through the attr method,
- * because updating them through the property setter doesn't work reliably.
- * In the example of `width`/`height`, the problem is that the setter only
- * accepts numeric values, but the attribute can also be set to a string like `50%`.
- * If this list becomes too big, rethink this approach.
- */
-const always_set_through_set_attribute = ['width', 'height'];
 function set_attributes(node, attributes) {
     // @ts-ignore
     const descriptors = Object.getOwnPropertyDescriptors(node.__proto__);
@@ -293,7 +285,7 @@ function set_attributes(node, attributes) {
         else if (key === '__value') {
             node.value = node[key] = attributes[key];
         }
-        else if (descriptors[key] && descriptors[key].set && always_set_through_set_attribute.indexOf(key) === -1) {
+        else if (descriptors[key] && descriptors[key].set) {
             node[key] = attributes[key];
         }
         else {
@@ -3214,7 +3206,7 @@ function create_each_block_1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(a, "class", "link svelte-hfomrx");
+			attr(a, "class", "link svelte-ngjace");
 			attr(a, "href", a_href_value = /*link*/ ctx[10].url);
 			toggle_class(a, "active", /*link*/ ctx[10].url === window.location.pathname);
 		},
@@ -3357,9 +3349,9 @@ function create_if_block$2(ctx) {
 		h() {
 			attr(button, "id", "close");
 			attr(button, "aria-label", "Close Navigation");
-			attr(button, "class", "svelte-hfomrx");
+			attr(button, "class", "svelte-ngjace");
 			attr(nav, "id", "popup");
-			attr(nav, "class", "svelte-hfomrx");
+			attr(nav, "class", "svelte-ngjace");
 		},
 		m(target, anchor) {
 			insert_hydration(target, nav, anchor);
@@ -3591,15 +3583,15 @@ function create_fragment$2(ctx) {
 		},
 		h() {
 			attr(a0, "href", "/");
-			attr(a0, "class", "logo svelte-hfomrx");
-			attr(nav, "class", "svelte-hfomrx");
-			attr(div0, "class", "desktop-nav svelte-hfomrx");
+			attr(a0, "class", "logo svelte-ngjace");
+			attr(nav, "class", "svelte-ngjace");
+			attr(div0, "class", "desktop-nav svelte-ngjace");
 			attr(a1, "href", "/");
-			attr(a1, "class", "logo svelte-hfomrx");
+			attr(a1, "class", "logo svelte-ngjace");
 			attr(button, "id", "open");
 			attr(button, "aria-label", "Open mobile navigation");
-			attr(div1, "class", "mobile-nav svelte-hfomrx");
-			attr(header, "class", "section-container svelte-hfomrx");
+			attr(div1, "class", "mobile-nav svelte-ngjace");
+			attr(header, "class", "section-container svelte-ngjace");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
 			attr(div3, "id", "section-8b77acfe-0471-48e3-99b2-a702dfe9a248");
@@ -8381,26 +8373,23 @@ function create_fragment$7(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "Name"
+					"title": "Corta"
 				},
 				site_nav: [
 					{
 						"link": {
-							"url": "http://localhost:5173/",
+							"url": "http://localhost:5173/theme-blog",
 							"label": "Home"
 						}
 					},
 					{
 						"link": {
-							"url": "http://localhost:5173/article-list",
-							"label": "Blog"
+							"url": "http://localhost:5173/about",
+							"label": "About"
 						}
 					},
 					{
-						"link": {
-							"url": "http://localhost:5173/article-list",
-							"label": "About"
-						}
+						"link": { "url": "/blog", "label": "Blog" }
 					}
 				]
 			}
