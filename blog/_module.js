@@ -4423,7 +4423,7 @@ function create_fragment$5(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "corta"
+					"title": "Name"
 				},
 				site_nav: [
 					{
@@ -4462,7 +4462,7 @@ function create_fragment$5(ctx) {
 					{
 						"date": "June 3, 2023",
 						"link": {
-							"url": "/blog-entry",
+							"url": "https://primosites.vercel.app/blog-entry",
 							"label": "Mastering the art of responsive design: a comprehensive guide"
 						},
 						"thumbnail": {

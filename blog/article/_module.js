@@ -1123,8 +1123,6 @@ function create_fragment(ctx) {
 	let link1;
 	let link2;
 	let link3;
-	let link4;
-	let link4_href_value;
 	let title_value;
 	let meta;
 	let style;
@@ -1138,7 +1136,6 @@ function create_fragment(ctx) {
 			link1 = element("link");
 			link2 = element("link");
 			link3 = element("link");
-			link4 = element("link");
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
@@ -1146,7 +1143,7 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-763n00', document.head);
+			const head_nodes = head_selector('svelte-q47lvn', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1158,14 +1155,6 @@ function create_fragment(ctx) {
 			link1 = claim_element(head_nodes, "LINK", { rel: true, href: true });
 			link2 = claim_element(head_nodes, "LINK", { href: true, rel: true });
 			link3 = claim_element(head_nodes, "LINK", { href: true, rel: true });
-
-			link4 = claim_element(head_nodes, "LINK", {
-				rel: true,
-				type: true,
-				sizes: true,
-				href: true
-			});
-
 			meta = claim_element(head_nodes, "META", { name: true, content: true });
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
@@ -1186,10 +1175,6 @@ function create_fragment(ctx) {
 			attr(link2, "rel", "stylesheet");
 			attr(link3, "href", "https://fonts.bunny.net/css?family=merriweather:300,300i,400,400i,700,700i,900,900i");
 			attr(link3, "rel", "stylesheet");
-			attr(link4, "rel", "shortcut icon");
-			attr(link4, "type", "image/jpg");
-			attr(link4, "sizes", "32x32");
-			attr(link4, "href", link4_href_value = /*favicon*/ ctx[0].url);
 			attr(meta, "name", "description");
 			attr(meta, "content", /*description*/ ctx[3]);
 		},
@@ -1198,7 +1183,6 @@ function create_fragment(ctx) {
 			append_hydration(document.head, link1);
 			append_hydration(document.head, link2);
 			append_hydration(document.head, link3);
-			append_hydration(document.head, link4);
 			append_hydration(document.head, meta);
 			if (if_block) if_block.m(document.head, null);
 			append_hydration(document.head, style);
@@ -1207,10 +1191,6 @@ function create_fragment(ctx) {
 		p(ctx, [dirty]) {
 			if (dirty & /*favicon*/ 1 && link0_href_value !== (link0_href_value = /*favicon*/ ctx[0].url)) {
 				attr(link0, "href", link0_href_value);
-			}
-
-			if (dirty & /*favicon*/ 1 && link4_href_value !== (link4_href_value = /*favicon*/ ctx[0].url)) {
-				attr(link4, "href", link4_href_value);
 			}
 
 			if (dirty & /*title*/ 4 && title_value !== (title_value = /*title*/ ctx[2])) {
@@ -1241,7 +1221,6 @@ function create_fragment(ctx) {
 			detach(link1);
 			detach(link2);
 			detach(link3);
-			detach(link4);
 			detach(meta);
 			if (if_block) if_block.d(detaching);
 			detach(style);
@@ -8402,7 +8381,7 @@ function create_fragment$7(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "corta"
+					"title": "Name"
 				},
 				site_nav: [
 					{
@@ -8457,7 +8436,7 @@ function create_fragment$7(ctx) {
 				description: "",
 				content: {
 					"html": "<h1>Heading 1</h1><p>Represent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark> in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had <strong>work of destruction</strong>.</p><p><em>Some more text that's italicized to make an impact.</em></p><ol><li><p>Here are some new ways to learn about this article</p></li><li><p>Some more ways</p></li><li><p>Go to \"Site\" and then css to change the styling of this editorial content.</p></li></ol><h2>Heading 2</h2><p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when <strong><mark>fundamentals</mark></strong> are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was <strong><mark>constructing</mark></strong> first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.</p><h3>Heading 3</h3><p>Some content that is interesting to read about. Many length did sections. The there and wonder take release. Love is the Way. Cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.</p>",
-					"markdown": "# Heading 1\n\nRepresent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark>\n\n in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had **work of destruction**.\n\n*Some more text that's italicized to make an impact.*\n\n1. Here are some new ways to learn about this article\n\n2. Some more ways\n\n3. Go to \"Site\" and then css to change the styling of this editorial content.\n\n\n<!-- -->\n\n## Heading 2\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when **<mark>fundamentals</mark>\n\n** are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was **<mark>constructing</mark>\n\n** first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.\n\n### Heading 3\n\nSome content that is interesting to read about. Many length did sections. The there and wonder take release cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.\n\n"
+					"markdown": "# Heading 1\n\nRepresent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark>\n\n in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had **work of destruction**.\n\n*Some more text that's italicized to make an impact.*\n\n1. Here are some new ways to learn about this article\n\n2. Some more ways\n\n3. Go to \"Site\" and then css to change the styling of this editorial content.\n\n\n<!-- -->\n\n## Heading 2\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when **<mark>fundamentals</mark>\n\n** are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was **<mark>constructing</mark>\n\n** first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.\n\n### Heading 3\n\nSome content that is interesting to read about. Many length did sections. The there and wonder take release. Love is the Way. Cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.\n\n"
 				}
 			}
 		});

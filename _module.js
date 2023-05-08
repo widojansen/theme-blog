@@ -7261,7 +7261,7 @@ function create_if_block_5(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "message error svelte-atbrdi");
+			attr(div, "class", "message error svelte-o5ike2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -7306,7 +7306,7 @@ function create_if_block_4$1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "message svelte-atbrdi");
+			attr(div, "class", "message svelte-o5ike2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -7391,11 +7391,11 @@ function create_if_block_2$1(ctx) {
 			attr(input, "name", "email");
 			attr(input, "type", "text");
 			attr(input, "placeholder", input_placeholder_value = /*form*/ ctx[1].placeholder);
-			attr(input, "class", "svelte-atbrdi");
-			attr(label, "class", "svelte-atbrdi");
-			attr(button, "class", "button svelte-atbrdi");
+			attr(input, "class", "svelte-o5ike2");
+			attr(label, "class", "svelte-o5ike2");
+			attr(button, "class", "button svelte-o5ike2");
 			attr(button, "type", "submit");
-			attr(form_1, "class", "svelte-atbrdi");
+			attr(form_1, "class", "svelte-o5ike2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, form_1, anchor);
@@ -7536,7 +7536,7 @@ function create_if_block_1$2(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "graphic left svelte-atbrdi");
+			attr(div, "class", "graphic left svelte-o5ike2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -7567,7 +7567,7 @@ function create_if_block$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "graphic right svelte-atbrdi");
+			attr(div, "class", "graphic right svelte-o5ike2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -7648,10 +7648,10 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h1, "class", "headline svelte-atbrdi");
-			attr(section, "class", "section-container svelte-atbrdi");
-			attr(div0, "class", "component svelte-atbrdi");
-			attr(div1, "class", "section svelte-atbrdi");
+			attr(h1, "class", "headline svelte-o5ike2");
+			attr(section, "class", "section-container svelte-o5ike2");
+			attr(div0, "class", "component svelte-o5ike2");
+			attr(div1, "class", "section svelte-o5ike2");
 			attr(div1, "id", "section-63754163-a178-485f-85fd-86b46c47a959");
 		},
 		m(target, anchor) {
@@ -8541,7 +8541,7 @@ function create_fragment$6(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "corta"
+					"title": "Name"
 				},
 				site_nav: [
 					{
@@ -8575,7 +8575,7 @@ function create_fragment$6(ctx) {
 				image: { "alt": "", "url": "" },
 				title: "Blog",
 				description: "",
-				heading: "a blog about things I care about",
+				heading: "some blog with things I care about",
 				form: {
 					"endpoint": "https://formsubmit.co/your@email.com",
 					"placeholder": "Email address",
