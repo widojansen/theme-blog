@@ -8606,7 +8606,7 @@ function create_fragment$6(ctx) {
 				image: { "alt": "", "url": "" },
 				title: "Blog",
 				description: "",
-				heading: "a blog about things I care about",
+				heading: "a blog about code & content",
 				form: {
 					"endpoint": "https://formsubmit.co/your@email.com",
 					"placeholder": "Email address",
@@ -8645,7 +8645,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "June 3, 2023",
 						"link": {
-							"url": "/",
+							"url": "https://primosites.vercel.app/",
 							"label": "Mastering the art of responsive design: a comprehensive guide"
 						},
 						"thumbnail": {
@@ -8662,7 +8662,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "August 12, 2023",
 						"link": {
-							"url": "/",
+							"url": "https://primosites.vercel.app/",
 							"label": "10 essential tools every web developer should know"
 						},
 						"thumbnail": {
