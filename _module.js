@@ -272,6 +272,14 @@ function attr(node, attribute, value) {
     else if (node.getAttribute(attribute) !== value)
         node.setAttribute(attribute, value);
 }
+/**
+ * List of attributes that should always be set through the attr method,
+ * because updating them through the property setter doesn't work reliably.
+ * In the example of `width`/`height`, the problem is that the setter only
+ * accepts numeric values, but the attribute can also be set to a string like `50%`.
+ * If this list becomes too big, rethink this approach.
+ */
+const always_set_through_set_attribute = ['width', 'height'];
 function set_attributes(node, attributes) {
     // @ts-ignore
     const descriptors = Object.getOwnPropertyDescriptors(node.__proto__);
@@ -285,7 +293,7 @@ function set_attributes(node, attributes) {
         else if (key === '__value') {
             node.value = node[key] = attributes[key];
         }
-        else if (descriptors[key] && descriptors[key].set) {
+        else if (descriptors[key] && descriptors[key].set && always_set_through_set_attribute.indexOf(key) === -1) {
             node[key] = attributes[key];
         }
         else {
@@ -1115,6 +1123,9 @@ function create_fragment(ctx) {
 	let link1;
 	let link2;
 	let link3;
+	let link4;
+	let script;
+	let script_src_value;
 	let title_value;
 	let meta;
 	let style;
@@ -1128,6 +1139,8 @@ function create_fragment(ctx) {
 			link1 = element("link");
 			link2 = element("link");
 			link3 = element("link");
+			link4 = element("link");
+			script = element("script");
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
@@ -1135,7 +1148,7 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-q47lvn', document.head);
+			const head_nodes = head_selector('svelte-bwfhgt', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1147,6 +1160,10 @@ function create_fragment(ctx) {
 			link1 = claim_element(head_nodes, "LINK", { rel: true, href: true });
 			link2 = claim_element(head_nodes, "LINK", { href: true, rel: true });
 			link3 = claim_element(head_nodes, "LINK", { href: true, rel: true });
+			link4 = claim_element(head_nodes, "LINK", { rel: true, href: true });
+			script = claim_element(head_nodes, "SCRIPT", { type: true, src: true });
+			var script_nodes = children(script);
+			script_nodes.forEach(detach);
 			meta = claim_element(head_nodes, "META", { name: true, content: true });
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
@@ -1167,6 +1184,10 @@ function create_fragment(ctx) {
 			attr(link2, "rel", "stylesheet");
 			attr(link3, "href", "https://fonts.bunny.net/css?family=merriweather:300,300i,400,400i,700,700i,900,900i");
 			attr(link3, "rel", "stylesheet");
+			attr(link4, "rel", "stylesheet");
+			attr(link4, "href", "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/light.css");
+			attr(script, "type", "module");
+			if (!src_url_equal(script.src, script_src_value = "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js")) attr(script, "src", script_src_value);
 			attr(meta, "name", "description");
 			attr(meta, "content", /*description*/ ctx[3]);
 		},
@@ -1175,6 +1196,8 @@ function create_fragment(ctx) {
 			append_hydration(document.head, link1);
 			append_hydration(document.head, link2);
 			append_hydration(document.head, link3);
+			append_hydration(document.head, link4);
+			append_hydration(document.head, script);
 			append_hydration(document.head, meta);
 			if (if_block) if_block.m(document.head, null);
 			append_hydration(document.head, style);
@@ -1213,6 +1236,8 @@ function create_fragment(ctx) {
 			detach(link1);
 			detach(link2);
 			detach(link3);
+			detach(link4);
+			detach(script);
 			detach(meta);
 			if (if_block) if_block.d(detaching);
 			detach(style);
@@ -7874,7 +7899,7 @@ function create_if_block$4(ctx) {
 			attr(img, "data-key", img_data_key_value = "items[" + /*i*/ ctx[8] + "].thumbnail");
 			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[6].thumbnail.url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*item*/ ctx[6].thumbnail.alt);
-			attr(img, "class", "svelte-2yri89");
+			attr(img, "class", "svelte-10jylfj");
 		},
 		m(target, anchor) {
 			insert_hydration(target, img, anchor);
@@ -7955,12 +7980,12 @@ function create_each_block$1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(a, "class", "title svelte-2yri89");
+			attr(a, "class", "title svelte-10jylfj");
 			attr(a, "href", a_href_value = /*item*/ ctx[6].link.url);
-			attr(div0, "class", "description svelte-2yri89");
-			attr(span, "class", "date svelte-2yri89");
+			attr(div0, "class", "description svelte-10jylfj");
+			attr(span, "class", "date svelte-10jylfj");
 			attr(div1, "class", "post-info");
-			attr(li, "class", "svelte-2yri89");
+			attr(li, "class", "svelte-10jylfj");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
@@ -8063,9 +8088,9 @@ function create_fragment$4(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "svelte-2yri89");
-			attr(ul, "class", "items svelte-2yri89");
-			attr(section, "class", "section-container svelte-2yri89");
+			attr(h2, "class", "svelte-10jylfj");
+			attr(ul, "class", "items svelte-10jylfj");
+			attr(section, "class", "section-container svelte-10jylfj");
 			attr(div0, "class", "component");
 			attr(div1, "class", "section");
 			attr(div1, "id", "section-6eeaaa91-2985-4785-97a2-5dd44b6ec00e");
@@ -8547,23 +8572,26 @@ function create_fragment$6(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "Corta"
+					"title": "Name"
 				},
 				site_nav: [
 					{
 						"link": {
-							"url": "http://localhost:5173/theme-blog",
+							"url": "http://localhost:5173/",
 							"label": "Home"
 						}
 					},
 					{
 						"link": {
-							"url": "http://localhost:5173/about",
-							"label": "About"
+							"url": "http://localhost:5173/article-list",
+							"label": "Blog"
 						}
 					},
 					{
-						"link": { "url": "/blog", "label": "Blog" }
+						"link": {
+							"url": "http://localhost:5173/article-list",
+							"label": "About"
+						}
 					}
 				]
 			}
@@ -8578,7 +8606,7 @@ function create_fragment$6(ctx) {
 				image: { "alt": "", "url": "" },
 				title: "Blog",
 				description: "",
-				heading: "some blog about things I care about",
+				heading: "a blog about things I care about",
 				form: {
 					"endpoint": "https://formsubmit.co/your@email.com",
 					"placeholder": "Email address",
@@ -8617,7 +8645,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "June 3, 2023",
 						"link": {
-							"url": "/blog-entry",
+							"url": "/",
 							"label": "Mastering the art of responsive design: a comprehensive guide"
 						},
 						"thumbnail": {
@@ -8634,7 +8662,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "August 12, 2023",
 						"link": {
-							"url": "http://localhost:5173/blog-entry",
+							"url": "/",
 							"label": "10 essential tools every web developer should know"
 						},
 						"thumbnail": {
@@ -8651,7 +8679,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "September 12, 2023",
 						"link": {
-							"url": "http://localhost:5173/blog-entry",
+							"url": "/",
 							"label": "The future of web design: exploring innovative trends & technologies"
 						},
 						"thumbnail": {
@@ -8668,7 +8696,7 @@ function create_fragment$6(ctx) {
 					{
 						"date": "December 12, 2023",
 						"link": {
-							"url": "http://localhost:5173/blog-entry",
+							"url": "/",
 							"label": "The Power of Minimalism in UI/UX Design"
 						},
 						"thumbnail": {

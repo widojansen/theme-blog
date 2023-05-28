@@ -272,6 +272,14 @@ function attr(node, attribute, value) {
     else if (node.getAttribute(attribute) !== value)
         node.setAttribute(attribute, value);
 }
+/**
+ * List of attributes that should always be set through the attr method,
+ * because updating them through the property setter doesn't work reliably.
+ * In the example of `width`/`height`, the problem is that the setter only
+ * accepts numeric values, but the attribute can also be set to a string like `50%`.
+ * If this list becomes too big, rethink this approach.
+ */
+const always_set_through_set_attribute = ['width', 'height'];
 function set_attributes(node, attributes) {
     // @ts-ignore
     const descriptors = Object.getOwnPropertyDescriptors(node.__proto__);
@@ -285,7 +293,7 @@ function set_attributes(node, attributes) {
         else if (key === '__value') {
             node.value = node[key] = attributes[key];
         }
-        else if (descriptors[key] && descriptors[key].set) {
+        else if (descriptors[key] && descriptors[key].set && always_set_through_set_attribute.indexOf(key) === -1) {
             node[key] = attributes[key];
         }
         else {
@@ -1115,6 +1123,9 @@ function create_fragment(ctx) {
 	let link1;
 	let link2;
 	let link3;
+	let link4;
+	let script;
+	let script_src_value;
 	let title_value;
 	let meta;
 	let style;
@@ -1128,6 +1139,8 @@ function create_fragment(ctx) {
 			link1 = element("link");
 			link2 = element("link");
 			link3 = element("link");
+			link4 = element("link");
+			script = element("script");
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
@@ -1135,7 +1148,7 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-q47lvn', document.head);
+			const head_nodes = head_selector('svelte-bwfhgt', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1147,6 +1160,10 @@ function create_fragment(ctx) {
 			link1 = claim_element(head_nodes, "LINK", { rel: true, href: true });
 			link2 = claim_element(head_nodes, "LINK", { href: true, rel: true });
 			link3 = claim_element(head_nodes, "LINK", { href: true, rel: true });
+			link4 = claim_element(head_nodes, "LINK", { rel: true, href: true });
+			script = claim_element(head_nodes, "SCRIPT", { type: true, src: true });
+			var script_nodes = children(script);
+			script_nodes.forEach(detach);
 			meta = claim_element(head_nodes, "META", { name: true, content: true });
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
@@ -1167,6 +1184,10 @@ function create_fragment(ctx) {
 			attr(link2, "rel", "stylesheet");
 			attr(link3, "href", "https://fonts.bunny.net/css?family=merriweather:300,300i,400,400i,700,700i,900,900i");
 			attr(link3, "rel", "stylesheet");
+			attr(link4, "rel", "stylesheet");
+			attr(link4, "href", "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/light.css");
+			attr(script, "type", "module");
+			if (!src_url_equal(script.src, script_src_value = "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js")) attr(script, "src", script_src_value);
 			attr(meta, "name", "description");
 			attr(meta, "content", /*description*/ ctx[3]);
 		},
@@ -1175,6 +1196,8 @@ function create_fragment(ctx) {
 			append_hydration(document.head, link1);
 			append_hydration(document.head, link2);
 			append_hydration(document.head, link3);
+			append_hydration(document.head, link4);
+			append_hydration(document.head, script);
 			append_hydration(document.head, meta);
 			if (if_block) if_block.m(document.head, null);
 			append_hydration(document.head, style);
@@ -1213,6 +1236,8 @@ function create_fragment(ctx) {
 			detach(link1);
 			detach(link2);
 			detach(link3);
+			detach(link4);
+			detach(script);
 			detach(meta);
 			if (if_block) if_block.d(detaching);
 			detach(style);
@@ -8267,23 +8292,26 @@ function create_fragment$6(ctx) {
 						"url": "",
 						"size": null
 					},
-					"title": "Corta"
+					"title": "Name"
 				},
 				site_nav: [
 					{
 						"link": {
-							"url": "http://localhost:5173/theme-blog",
+							"url": "http://localhost:5173/",
 							"label": "Home"
 						}
 					},
 					{
 						"link": {
-							"url": "http://localhost:5173/about",
-							"label": "About"
+							"url": "http://localhost:5173/article-list",
+							"label": "Blog"
 						}
 					},
 					{
-						"link": { "url": "/blog", "label": "Blog" }
+						"link": {
+							"url": "http://localhost:5173/article-list",
+							"label": "About"
+						}
 					}
 				]
 			}
@@ -8305,8 +8333,8 @@ function create_fragment$6(ctx) {
 				description: "",
 				heading: "I'm a developer, designer, engineer, and everything in-between.",
 				content: {
-					"html": "<p>I like to write about to the that true, claim cognitive think he always design with shall subjective to decided could the that on her expected boa the to spree. State with has in state client but went here, quickly on gone he commitment concept and set value to were harmonics.</p><p>Was me. Ran of creating assistant the in fall bidding brought dragged they'd volumes one the in any that as again. Feedback schemes allowed to what to in world avoid front the consideration the buttons were we parks. A the of pleasure he last a where have of up, the simple, never.</p><p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when fundamentals are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand.</p>",
-					"markdown": "The than to the that true, claim cognitive think he always design with shall subjective to decided could the that on her expected boa the to spree. State with has in state client but went here, quickly on gone he commitment concept and set value to were harmonics.\n\nWas me. Ran of creating assistant the in fall bidding brought dragged they'd volumes one the in any that as again. Feedback schemes allowed to what to in world avoid front the consideration the buttons were we parks. A the of pleasure he last a where have of up, the simple, never.\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when fundamentals are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand.\n\n"
+					"html": "<p>I like to write about to the that true, claim cognitive think he always design with shall subjective to decided could the that on her expected boa the to spree. State with has in state client but went here, quickly on gone he commitment concept and set value to were harmonics.</p><p>That was me, I ran off creating assistant the in fall bidding brought dragged they'd volumes one the in any that as again. Feedback schemes allowed to what to in world avoid front the consideration the buttons were we parks. A the of pleasure he last a where have that up, the simple, never.</p><p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when fundamentals are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand.</p>",
+					"markdown": "I like to write about to the that true, claim cognitive think he always design with shall subjective to decided could the that on her expected boa the to spree. State with has in state client but went here, quickly on gone he commitment concept and set value to were harmonics.\n\nWas me. Ran of creating assistant the in fall bidding brought dragged they'd volumes one the in any that as again. Feedback schemes allowed to what to in world avoid front the consideration the buttons were we parks. A the of pleasure he last a where have of up, the simple, never.\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when fundamentals are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand.\n\n"
 				}
 			}
 		});
