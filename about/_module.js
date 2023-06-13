@@ -8291,9 +8291,14 @@ function create_fragment$6(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: ""
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "About my Blog",
+				description: "I'm a developer, designer, founder and everything in-between."
 			}
 		});
 
@@ -8303,9 +8308,14 @@ function create_fragment$6(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "About my Blog",
+				description: "I'm a developer, designer, founder and everything in-between.",
 				logo: {
 					"image": {
 						"alt": "",
@@ -8350,8 +8360,8 @@ function create_fragment$6(ctx) {
 					"url": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
 					"size": null
 				},
-				title: "",
-				description: "",
+				title: "About my Blog",
+				description: "I'm a developer, designer, founder and everything in-between.",
 				heading: "I'm a developer, designer, founder and everything in-between.",
 				content: {
 					"html": "<p>I like to write about to the that true, claim cognitive think he always design with shall subjective to decided could the that on her expected boa the to spree. State with has in state client but went here, quickly on gone he commitment concept and set value to were harmonics.</p>\n<p>Was me. Ran of creating assistant the in fall bidding brought dragged they'd volumes one the in any that as again. Feedback schemes allowed to what to in world avoid front the consideration the buttons were we parks. A the of pleasure he last a where have of up, the simple, never.</p>\n<p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when fundamentals are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand.</p>",
@@ -8366,9 +8376,14 @@ function create_fragment$6(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "About my Blog",
+				description: "I'm a developer, designer, founder and everything in-between.",
 				heading: "Sign up to get weekly blog entires about X topic ",
 				form: {
 					"endpoint": "https://formsubmit.co/your@email.com",
@@ -8386,9 +8401,14 @@ function create_fragment$6(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "About my Blog",
+				description: "I'm a developer, designer, founder and everything in-between.",
 				heading: "",
 				email: "",
 				social_links: [
@@ -8418,9 +8438,14 @@ function create_fragment$6(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: ""
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "About my Blog",
+				description: "I'm a developer, designer, founder and everything in-between."
 			}
 		});
 

@@ -8395,11 +8395,16 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: ""
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "Article",
+				description: "This is an article discussing the merits of something or another."
 			}
 		});
 
@@ -8407,11 +8412,16 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "Article",
+				description: "This is an article discussing the merits of something or another.",
 				logo: {
 					"image": {
 						"alt": "",
@@ -8448,7 +8458,7 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: {
 					"alt": "",
@@ -8456,8 +8466,8 @@ function create_fragment$7(ctx) {
 					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
 					"size": null
 				},
-				title: "",
-				description: "",
+				title: "Article",
+				description: "This is an article discussing the merits of something or another.",
 				superhead: "JUNE 3, 2023 ",
 				heading: "Some title for the blog"
 			}
@@ -8467,11 +8477,16 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "Article",
+				description: "This is an article discussing the merits of something or another.",
 				content: {
 					"html": "<h1>Heading 1</h1><p>Represent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark> in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had <strong>work of destruction</strong>.</p><p><em>Some more text that's italicized to make an impact.</em></p><ol><li><p>Here are some new ways to learn about this article</p></li><li><p>Some more ways</p></li><li><p>Go to \"Site\" and then css to change the styling of this editorial content.</p></li></ol><h2>Heading 2</h2><p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when <strong><mark>fundamentals</mark></strong> are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was <strong><mark>constructing</mark></strong> first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.</p><h3>Heading 3</h3><p>Some content that is interesting to read about. Many length did sections. The there and wonder take release. Love is the Way. Cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.</p>",
 					"markdown": "# Heading 1\n\nRepresent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark>\n\n in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had **work of destruction**.\n\n*Some more text that's italicized to make an impact.*\n\n1. Here are some new ways to learn about this article\n\n2. Some more ways\n\n3. Go to \"Site\" and then css to change the styling of this editorial content.\n\n\n<!-- -->\n\n## Heading 2\n\nConcise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when **<mark>fundamentals</mark>\n\n** are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was **<mark>constructing</mark>\n\n** first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.\n\n### Heading 3\n\nSome content that is interesting to read about. Many length did sections. The there and wonder take release. Love is the Way. Cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.\n\n"
@@ -8483,11 +8498,16 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "Article",
+				description: "This is an article discussing the merits of something or another.",
 				heading: "Sign up to get weekly blog entires about X topic ",
 				form: {
 					"endpoint": "https://formsubmit.co/your@email.com",
@@ -8503,11 +8523,16 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: "",
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "Article",
+				description: "This is an article discussing the merits of something or another.",
 				heading: "",
 				email: "",
 				social_links: [
@@ -8535,11 +8560,16 @@ function create_fragment$7(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
-				title: "",
-				description: ""
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
+				title: "Article",
+				description: "This is an article discussing the merits of something or another."
 			}
 		});
 

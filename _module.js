@@ -7373,7 +7373,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (127:4) {:catch error}
+// (133:4) {:catch error}
 function create_catch_block(ctx) {
 	let span;
 	let t;
@@ -7402,7 +7402,7 @@ function create_catch_block(ctx) {
 	};
 }
 
-// (101:4) {:then value}
+// (107:4) {:then value}
 function create_then_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*value*/ ctx[7];
@@ -7475,17 +7475,60 @@ function create_then_block(ctx) {
 	};
 }
 
-// (102:6) {#each value as item, i}
+// (125:10) {#if item.image}
+function create_if_block$3(ctx) {
+	let img;
+	let img_data_key_value;
+	let img_src_value;
+	let img_alt_value;
+
+	return {
+		c() {
+			img = element("img");
+			this.h();
+		},
+		l(nodes) {
+			img = claim_element(nodes, "IMG", {
+				"data-key": true,
+				src: true,
+				alt: true,
+				class: true
+			});
+
+			this.h();
+		},
+		h() {
+			attr(img, "data-key", img_data_key_value = "items[" + /*i*/ ctx[10] + "].image");
+			if (!src_url_equal(img.src, img_src_value = /*item*/ ctx[8].image.url)) attr(img, "src", img_src_value);
+			attr(img, "alt", img_alt_value = /*item*/ ctx[8].image.alt);
+			attr(img, "class", "svelte-10jylfj");
+		},
+		m(target, anchor) {
+			insert_hydration(target, img, anchor);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(img);
+		}
+	};
+}
+
+// (108:6) {#each value as item, i}
 function create_each_block$1(ctx) {
 	let li;
 	let div1;
 	let a;
-	let t0_value = /*item*/ ctx[8].name + "";
+	let t0_value = (/*item*/ ctx[8].title || /*item*/ ctx[8].name) + "";
 	let t0;
+	let a_href_value;
 	let t1;
 	let div0;
+	let t2_value = /*item*/ ctx[8].description + "";
 	let t2;
+	let t3;
+	let t4;
 	let li_intro;
+	let if_block = /*item*/ ctx[8].image && create_if_block$3(ctx);
 
 	return {
 		c() {
@@ -7495,7 +7538,10 @@ function create_each_block$1(ctx) {
 			t0 = text(t0_value);
 			t1 = space();
 			div0 = element("div");
-			t2 = space();
+			t2 = text(t2_value);
+			t3 = space();
+			if (if_block) if_block.c();
+			t4 = space();
 			this.h();
 		},
 		l(nodes) {
@@ -7510,15 +7556,18 @@ function create_each_block$1(ctx) {
 			t1 = claim_space(div1_nodes);
 			div0 = claim_element(div1_nodes, "DIV", { class: true });
 			var div0_nodes = children(div0);
+			t2 = claim_text(div0_nodes, t2_value);
 			div0_nodes.forEach(detach);
 			div1_nodes.forEach(detach);
-			t2 = claim_space(li_nodes);
+			t3 = claim_space(li_nodes);
+			if (if_block) if_block.l(li_nodes);
+			t4 = claim_space(li_nodes);
 			li_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
 			attr(a, "class", "title svelte-10jylfj");
-			attr(a, "href", "/");
+			attr(a, "href", a_href_value = "/" + /*item*/ ctx[8].url);
 			attr(div0, "class", "description svelte-10jylfj");
 			attr(div1, "class", "post-info");
 			attr(li, "class", "svelte-10jylfj");
@@ -7530,9 +7579,14 @@ function create_each_block$1(ctx) {
 			append_hydration(a, t0);
 			append_hydration(div1, t1);
 			append_hydration(div1, div0);
-			append_hydration(li, t2);
+			append_hydration(div0, t2);
+			append_hydration(li, t3);
+			if (if_block) if_block.m(li, null);
+			append_hydration(li, t4);
 		},
-		p: noop,
+		p(ctx, dirty) {
+			if (/*item*/ ctx[8].image) if_block.p(ctx, dirty);
+		},
 		i(local) {
 			if (!li_intro) {
 				add_render_callback(() => {
@@ -7544,11 +7598,12 @@ function create_each_block$1(ctx) {
 		o: noop,
 		d(detaching) {
 			if (detaching) detach(li);
+			if (if_block) if_block.d();
 		}
 	};
 }
 
-// (99:24)        <span>loading pages</span>     {:then value}
+// (105:24)        <span>loading pages</span>     {:then value}
 function create_pending_block(ctx) {
 	let span;
 	let t;
@@ -7640,7 +7695,7 @@ function create_fragment$3(ctx) {
 			attr(section, "class", "section-container svelte-10jylfj");
 			attr(div0, "class", "component");
 			attr(div1, "class", "section");
-			attr(div1, "id", "section-1a02d95e-6714-425d-979b-eb2fed89e984");
+			attr(div1, "id", "section-888b3ddd-d49d-4ac0-a7f7-2f7d6d718494");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div1, anchor);
@@ -7681,10 +7736,18 @@ function instance$3($$self, $$props, $$invalidate) {
 	let { items } = $$props;
 
 	async function get_posts() {
-		return await axios.get("https://theme-blog-chi.vercel.app/primo.json").then(({ data }) => {
+		const page_list = await axios.get("https://theme-blog-chi.vercel.app/primo.json").then(({ data }) => {
 			console.log(data.pages);
-			return data.pages;
+
+			return data.pages.map(page => ({
+				name: page.name,
+				url: page.url,
+				...page.content.en
+			}));
 		});
+
+		console.log({ page_list });
+		return page_list;
 	}
 
 	$$self.$$set = $$props => {
@@ -8033,7 +8096,7 @@ function create_if_block_1$2(ctx) {
 }
 
 // (188:2) {#if graphics.right}
-function create_if_block$3(ctx) {
+function create_if_block$4(ctx) {
 	let img;
 	let img_src_value;
 	let img_alt_value;
@@ -8097,7 +8160,7 @@ function create_fragment$4(ctx) {
 	}
 
 	let if_block1 = /*graphics*/ ctx[2].left && create_if_block_1$2(ctx);
-	let if_block2 = /*graphics*/ ctx[2].right && create_if_block$3(ctx);
+	let if_block2 = /*graphics*/ ctx[2].right && create_if_block$4(ctx);
 
 	return {
 		c() {
@@ -8215,7 +8278,7 @@ function create_fragment$4(ctx) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
-					if_block2 = create_if_block$3(ctx);
+					if_block2 = create_if_block$4(ctx);
 					if_block2.c();
 					if_block2.m(section, null);
 				}
@@ -8332,7 +8395,7 @@ function get_each_context$2(ctx, list, i) {
 }
 
 // (105:8) {#if item.thumbnail.url}
-function create_if_block$4(ctx) {
+function create_if_block$5(ctx) {
 	let img;
 	let img_data_key_value;
 	let img_src_value;
@@ -8394,7 +8457,7 @@ function create_each_block$2(ctx) {
 	let t3;
 	let t4;
 	let t5;
-	let if_block = /*item*/ ctx[6].thumbnail.url && create_if_block$4(ctx);
+	let if_block = /*item*/ ctx[6].thumbnail.url && create_if_block$5(ctx);
 
 	return {
 		c() {
@@ -8473,7 +8536,7 @@ function create_each_block$2(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block$4(ctx);
+					if_block = create_if_block$5(ctx);
 					if_block.c();
 					if_block.m(li, t5);
 				}
@@ -9080,10 +9143,7 @@ function create_fragment$7(ctx) {
 							"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
 							"size": null
 						},
-						"description": {
-							"html": "<p>This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.</p>",
-							"markdown": "This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.\n\n"
-						}
+						"description": ""
 					},
 					{
 						"date": "August 12, 2023",
@@ -9097,10 +9157,7 @@ function create_fragment$7(ctx) {
 							"url": "https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2371&q=80",
 							"size": null
 						},
-						"description": {
-							"html": "<p>Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.</p>",
-							"markdown": "Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.\n\n"
-						}
+						"description": ""
 					},
 					{
 						"date": "September 12, 2023",
@@ -9114,10 +9171,7 @@ function create_fragment$7(ctx) {
 							"url": "https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
 							"size": null
 						},
-						"description": {
-							"html": "<p>Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry.</p>",
-							"markdown": "Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry."
-						}
+						"description": ""
 					},
 					{
 						"date": "December 12, 2023",
@@ -9131,10 +9185,7 @@ function create_fragment$7(ctx) {
 							"url": "https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2313&q=80",
 							"size": null
 						},
-						"description": {
-							"html": "<p>Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics.</p>",
-							"markdown": "Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics."
-						}
+						"description": ""
 					}
 				]
 			}

@@ -4439,9 +4439,14 @@ function create_fragment$5(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
 				title: "Blog",
-				description: ""
+				description: "This is my blog and it is wonderful."
 			}
 		});
 
@@ -4451,9 +4456,14 @@ function create_fragment$5(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
 				title: "Blog",
-				description: "",
+				description: "This is my blog and it is wonderful.",
 				logo: {
 					"image": {
 						"alt": "",
@@ -4492,9 +4502,14 @@ function create_fragment$5(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
 				title: "Blog",
-				description: "",
+				description: "This is my blog and it is wonderful.",
 				heading: "All Articles",
 				items: [
 					{
@@ -4576,9 +4591,14 @@ function create_fragment$5(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
 				title: "Blog",
-				description: "",
+				description: "This is my blog and it is wonderful.",
 				heading: "",
 				email: "",
 				social_links: [
@@ -4608,9 +4628,14 @@ function create_fragment$5(ctx) {
 					"alt": "",
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
-				image: { "alt": "", "url": "" },
+				image: {
+					"alt": "",
+					"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+					"size": null
+				},
 				title: "Blog",
-				description: ""
+				description: "This is my blog and it is wonderful."
 			}
 		});
 
