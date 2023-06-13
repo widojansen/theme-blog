@@ -1126,6 +1126,8 @@ function create_fragment(ctx) {
 	let link4;
 	let script;
 	let script_src_value;
+	let link5;
+	let link5_href_value;
 	let title_value;
 	let meta;
 	let style;
@@ -1141,6 +1143,7 @@ function create_fragment(ctx) {
 			link3 = element("link");
 			link4 = element("link");
 			script = element("script");
+			link5 = element("link");
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
@@ -1148,7 +1151,7 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-bwfhgt', document.head);
+			const head_nodes = head_selector('svelte-1pww12a', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1164,6 +1167,14 @@ function create_fragment(ctx) {
 			script = claim_element(head_nodes, "SCRIPT", { type: true, src: true });
 			var script_nodes = children(script);
 			script_nodes.forEach(detach);
+
+			link5 = claim_element(head_nodes, "LINK", {
+				rel: true,
+				type: true,
+				sizes: true,
+				href: true
+			});
+
 			meta = claim_element(head_nodes, "META", { name: true, content: true });
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
@@ -1188,6 +1199,10 @@ function create_fragment(ctx) {
 			attr(link4, "href", "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/light.css");
 			attr(script, "type", "module");
 			if (!src_url_equal(script.src, script_src_value = "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js")) attr(script, "src", script_src_value);
+			attr(link5, "rel", "shortcut icon");
+			attr(link5, "type", "image/jpg");
+			attr(link5, "sizes", "32x32");
+			attr(link5, "href", link5_href_value = /*favicon*/ ctx[0].url);
 			attr(meta, "name", "description");
 			attr(meta, "content", /*description*/ ctx[3]);
 		},
@@ -1198,6 +1213,7 @@ function create_fragment(ctx) {
 			append_hydration(document.head, link3);
 			append_hydration(document.head, link4);
 			append_hydration(document.head, script);
+			append_hydration(document.head, link5);
 			append_hydration(document.head, meta);
 			if (if_block) if_block.m(document.head, null);
 			append_hydration(document.head, style);
@@ -1206,6 +1222,10 @@ function create_fragment(ctx) {
 		p(ctx, [dirty]) {
 			if (dirty & /*favicon*/ 1 && link0_href_value !== (link0_href_value = /*favicon*/ ctx[0].url)) {
 				attr(link0, "href", link0_href_value);
+			}
+
+			if (dirty & /*favicon*/ 1 && link5_href_value !== (link5_href_value = /*favicon*/ ctx[0].url)) {
+				attr(link5, "href", link5_href_value);
 			}
 
 			if (dirty & /*title*/ 4 && title_value !== (title_value = /*title*/ ctx[2])) {
@@ -1238,6 +1258,7 @@ function create_fragment(ctx) {
 			detach(link3);
 			detach(link4);
 			detach(script);
+			detach(link5);
 			detach(meta);
 			if (if_block) if_block.d(detaching);
 			detach(style);
@@ -8268,7 +8289,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "",
@@ -8280,7 +8301,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "",
@@ -8321,7 +8342,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: {
 					"alt": "Abdullah",
@@ -8343,7 +8364,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "",
@@ -8363,7 +8384,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "",
@@ -8395,7 +8416,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "",

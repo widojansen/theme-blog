@@ -6,6 +6,11 @@ function assign(tar, src) {
         tar[k] = src[k];
     return tar;
 }
+// Adapted from https://github.com/then/is-promise/blob/master/index.js
+// Distributed under MIT License https://github.com/then/is-promise/blob/master/LICENSE
+function is_promise(value) {
+    return !!value && (typeof value === 'object' || typeof value === 'function') && typeof value.then === 'function';
+}
 function run(fn) {
     return fn();
 }
@@ -893,6 +898,88 @@ function create_bidirectional_transition(node, fn, params, intro) {
     };
 }
 
+function handle_promise(promise, info) {
+    const token = info.token = {};
+    function update(type, index, key, value) {
+        if (info.token !== token)
+            return;
+        info.resolved = value;
+        let child_ctx = info.ctx;
+        if (key !== undefined) {
+            child_ctx = child_ctx.slice();
+            child_ctx[key] = value;
+        }
+        const block = type && (info.current = type)(child_ctx);
+        let needs_flush = false;
+        if (info.block) {
+            if (info.blocks) {
+                info.blocks.forEach((block, i) => {
+                    if (i !== index && block) {
+                        group_outros();
+                        transition_out(block, 1, 1, () => {
+                            if (info.blocks[i] === block) {
+                                info.blocks[i] = null;
+                            }
+                        });
+                        check_outros();
+                    }
+                });
+            }
+            else {
+                info.block.d(1);
+            }
+            block.c();
+            transition_in(block, 1);
+            block.m(info.mount(), info.anchor);
+            needs_flush = true;
+        }
+        info.block = block;
+        if (info.blocks)
+            info.blocks[index] = block;
+        if (needs_flush) {
+            flush();
+        }
+    }
+    if (is_promise(promise)) {
+        const current_component = get_current_component();
+        promise.then(value => {
+            set_current_component(current_component);
+            update(info.then, 1, info.value, value);
+            set_current_component(null);
+        }, error => {
+            set_current_component(current_component);
+            update(info.catch, 2, info.error, error);
+            set_current_component(null);
+            if (!info.hasCatch) {
+                throw error;
+            }
+        });
+        // if we previously had a then/catch block, destroy it
+        if (info.current !== info.pending) {
+            update(info.pending, 0);
+            return true;
+        }
+    }
+    else {
+        if (info.current !== info.then) {
+            update(info.then, 1, info.value, promise);
+            return true;
+        }
+        info.resolved = promise;
+    }
+}
+function update_await_block_branch(info, ctx, dirty) {
+    const child_ctx = ctx.slice();
+    const { resolved } = info;
+    if (info.current === info.then) {
+        child_ctx[info.value] = resolved;
+    }
+    if (info.current === info.catch) {
+        child_ctx[info.error] = resolved;
+    }
+    info.block.p(child_ctx, dirty);
+}
+
 function get_spread_update(levels, updates) {
     const update = {};
     const to_null_out = {};
@@ -1126,6 +1213,8 @@ function create_fragment(ctx) {
 	let link4;
 	let script;
 	let script_src_value;
+	let link5;
+	let link5_href_value;
 	let title_value;
 	let meta;
 	let style;
@@ -1141,6 +1230,7 @@ function create_fragment(ctx) {
 			link3 = element("link");
 			link4 = element("link");
 			script = element("script");
+			link5 = element("link");
 			meta = element("meta");
 			if (if_block) if_block.c();
 			style = element("style");
@@ -1148,7 +1238,7 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = head_selector('svelte-bwfhgt', document.head);
+			const head_nodes = head_selector('svelte-1pww12a', document.head);
 
 			link0 = claim_element(head_nodes, "LINK", {
 				rel: true,
@@ -1164,6 +1254,14 @@ function create_fragment(ctx) {
 			script = claim_element(head_nodes, "SCRIPT", { type: true, src: true });
 			var script_nodes = children(script);
 			script_nodes.forEach(detach);
+
+			link5 = claim_element(head_nodes, "LINK", {
+				rel: true,
+				type: true,
+				sizes: true,
+				href: true
+			});
+
 			meta = claim_element(head_nodes, "META", { name: true, content: true });
 			if (if_block) if_block.l(head_nodes);
 			style = claim_element(head_nodes, "STYLE", {});
@@ -1188,6 +1286,10 @@ function create_fragment(ctx) {
 			attr(link4, "href", "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/light.css");
 			attr(script, "type", "module");
 			if (!src_url_equal(script.src, script_src_value = "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js")) attr(script, "src", script_src_value);
+			attr(link5, "rel", "shortcut icon");
+			attr(link5, "type", "image/jpg");
+			attr(link5, "sizes", "32x32");
+			attr(link5, "href", link5_href_value = /*favicon*/ ctx[0].url);
 			attr(meta, "name", "description");
 			attr(meta, "content", /*description*/ ctx[3]);
 		},
@@ -1198,6 +1300,7 @@ function create_fragment(ctx) {
 			append_hydration(document.head, link3);
 			append_hydration(document.head, link4);
 			append_hydration(document.head, script);
+			append_hydration(document.head, link5);
 			append_hydration(document.head, meta);
 			if (if_block) if_block.m(document.head, null);
 			append_hydration(document.head, style);
@@ -1206,6 +1309,10 @@ function create_fragment(ctx) {
 		p(ctx, [dirty]) {
 			if (dirty & /*favicon*/ 1 && link0_href_value !== (link0_href_value = /*favicon*/ ctx[0].url)) {
 				attr(link0, "href", link0_href_value);
+			}
+
+			if (dirty & /*favicon*/ 1 && link5_href_value !== (link5_href_value = /*favicon*/ ctx[0].url)) {
+				attr(link5, "href", link5_href_value);
 			}
 
 			if (dirty & /*title*/ 4 && title_value !== (title_value = /*title*/ ctx[2])) {
@@ -1238,6 +1345,7 @@ function create_fragment(ctx) {
 			detach(link3);
 			detach(link4);
 			detach(script);
+			detach(link5);
 			detach(meta);
 			if (if_block) if_block.d(detaching);
 			detach(style);
@@ -7258,6 +7366,332 @@ axios.default = axios;
 
 /* generated by Svelte v3.58.0 */
 
+function get_each_context$1(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[8] = list[i];
+	child_ctx[10] = i;
+	return child_ctx;
+}
+
+// (126:4) {:catch error}
+function create_catch_block(ctx) {
+	let span;
+	let t;
+
+	return {
+		c() {
+			span = element("span");
+			t = text("promise was rejected");
+		},
+		l(nodes) {
+			span = claim_element(nodes, "SPAN", {});
+			var span_nodes = children(span);
+			t = claim_text(span_nodes, "promise was rejected");
+			span_nodes.forEach(detach);
+		},
+		m(target, anchor) {
+			insert_hydration(target, span, anchor);
+			append_hydration(span, t);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(span);
+		}
+	};
+}
+
+// (100:4) {:then value}
+function create_then_block(ctx) {
+	let each_1_anchor;
+	let each_value = /*value*/ ctx[7];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+	}
+
+	return {
+		c() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = empty();
+		},
+		l(nodes) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(nodes);
+			}
+
+			each_1_anchor = empty();
+		},
+		m(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				if (each_blocks[i]) {
+					each_blocks[i].m(target, anchor);
+				}
+			}
+
+			insert_hydration(target, each_1_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*get_posts*/ 2) {
+				each_value = /*value*/ ctx[7];
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block$1(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value.length;
+			}
+		},
+		d(detaching) {
+			destroy_each(each_blocks, detaching);
+			if (detaching) detach(each_1_anchor);
+		}
+	};
+}
+
+// (101:6) {#each value as item, i}
+function create_each_block$1(ctx) {
+	let li;
+	let div1;
+	let a;
+	let t0_value = /*item*/ ctx[8].name + "";
+	let t0;
+	let t1;
+	let div0;
+	let t2;
+
+	return {
+		c() {
+			li = element("li");
+			div1 = element("div");
+			a = element("a");
+			t0 = text(t0_value);
+			t1 = space();
+			div0 = element("div");
+			t2 = space();
+			this.h();
+		},
+		l(nodes) {
+			li = claim_element(nodes, "LI", { class: true });
+			var li_nodes = children(li);
+			div1 = claim_element(li_nodes, "DIV", { class: true });
+			var div1_nodes = children(div1);
+			a = claim_element(div1_nodes, "A", { class: true, href: true });
+			var a_nodes = children(a);
+			t0 = claim_text(a_nodes, t0_value);
+			a_nodes.forEach(detach);
+			t1 = claim_space(div1_nodes);
+			div0 = claim_element(div1_nodes, "DIV", { class: true });
+			var div0_nodes = children(div0);
+			div0_nodes.forEach(detach);
+			div1_nodes.forEach(detach);
+			t2 = claim_space(li_nodes);
+			li_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(a, "class", "title svelte-10jylfj");
+			attr(a, "href", "/");
+			attr(div0, "class", "description svelte-10jylfj");
+			attr(div1, "class", "post-info");
+			attr(li, "class", "svelte-10jylfj");
+		},
+		m(target, anchor) {
+			insert_hydration(target, li, anchor);
+			append_hydration(li, div1);
+			append_hydration(div1, a);
+			append_hydration(a, t0);
+			append_hydration(div1, t1);
+			append_hydration(div1, div0);
+			append_hydration(li, t2);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(li);
+		}
+	};
+}
+
+// (98:24)        <span>promise is pending</span>     {:then value}
+function create_pending_block(ctx) {
+	let span;
+	let t;
+
+	return {
+		c() {
+			span = element("span");
+			t = text("promise is pending");
+		},
+		l(nodes) {
+			span = claim_element(nodes, "SPAN", {});
+			var span_nodes = children(span);
+			t = claim_text(span_nodes, "promise is pending");
+			span_nodes.forEach(detach);
+		},
+		m(target, anchor) {
+			insert_hydration(target, span, anchor);
+			append_hydration(span, t);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(span);
+		}
+	};
+}
+
+function create_fragment$3(ctx) {
+	let div1;
+	let div0;
+	let section;
+	let h2;
+	let t0;
+	let t1;
+	let ul;
+	let promise;
+
+	let info = {
+		ctx,
+		current: null,
+		token: null,
+		hasCatch: true,
+		pending: create_pending_block,
+		then: create_then_block,
+		catch: create_catch_block,
+		value: 7,
+		error: 11
+	};
+
+	handle_promise(promise = /*get_posts*/ ctx[1](), info);
+
+	return {
+		c() {
+			div1 = element("div");
+			div0 = element("div");
+			section = element("section");
+			h2 = element("h2");
+			t0 = text(/*heading*/ ctx[0]);
+			t1 = space();
+			ul = element("ul");
+			info.block.c();
+			this.h();
+		},
+		l(nodes) {
+			div1 = claim_element(nodes, "DIV", { class: true, id: true });
+			var div1_nodes = children(div1);
+			div0 = claim_element(div1_nodes, "DIV", { class: true });
+			var div0_nodes = children(div0);
+			section = claim_element(div0_nodes, "SECTION", { class: true });
+			var section_nodes = children(section);
+			h2 = claim_element(section_nodes, "H2", { class: true });
+			var h2_nodes = children(h2);
+			t0 = claim_text(h2_nodes, /*heading*/ ctx[0]);
+			h2_nodes.forEach(detach);
+			t1 = claim_space(section_nodes);
+			ul = claim_element(section_nodes, "UL", { class: true });
+			var ul_nodes = children(ul);
+			info.block.l(ul_nodes);
+			ul_nodes.forEach(detach);
+			section_nodes.forEach(detach);
+			div0_nodes.forEach(detach);
+			div1_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(h2, "class", "svelte-10jylfj");
+			attr(ul, "class", "items svelte-10jylfj");
+			attr(section, "class", "section-container svelte-10jylfj");
+			attr(div0, "class", "component");
+			attr(div1, "class", "section");
+			attr(div1, "id", "section-1a02d95e-6714-425d-979b-eb2fed89e984");
+		},
+		m(target, anchor) {
+			insert_hydration(target, div1, anchor);
+			append_hydration(div1, div0);
+			append_hydration(div0, section);
+			append_hydration(section, h2);
+			append_hydration(h2, t0);
+			append_hydration(section, t1);
+			append_hydration(section, ul);
+			info.block.m(ul, info.anchor = null);
+			info.mount = () => ul;
+			info.anchor = null;
+		},
+		p(new_ctx, [dirty]) {
+			ctx = new_ctx;
+			if (dirty & /*heading*/ 1) set_data(t0, /*heading*/ ctx[0]);
+			update_await_block_branch(info, ctx, dirty);
+		},
+		i: noop,
+		o: noop,
+		d(detaching) {
+			if (detaching) detach(div1);
+			info.block.d();
+			info.token = null;
+			info = null;
+		}
+	};
+}
+
+function instance$3($$self, $$props, $$invalidate) {
+	let { favicon } = $$props;
+	let { image } = $$props;
+	let { title } = $$props;
+	let { description } = $$props;
+	let { heading } = $$props;
+	let { items } = $$props;
+
+	async function get_posts() {
+		return await axios.get("https://theme-blog-chi.vercel.app/primo.json").then(({ data }) => {
+			console.log(data.pages);
+			return data.pages;
+		});
+	}
+
+	$$self.$$set = $$props => {
+		if ('favicon' in $$props) $$invalidate(2, favicon = $$props.favicon);
+		if ('image' in $$props) $$invalidate(3, image = $$props.image);
+		if ('title' in $$props) $$invalidate(4, title = $$props.title);
+		if ('description' in $$props) $$invalidate(5, description = $$props.description);
+		if ('heading' in $$props) $$invalidate(0, heading = $$props.heading);
+		if ('items' in $$props) $$invalidate(6, items = $$props.items);
+	};
+
+	return [heading, get_posts, favicon, image, title, description, items];
+}
+
+class Component$3 extends SvelteComponent {
+	constructor(options) {
+		super();
+
+		init(this, options, instance$3, create_fragment$3, safe_not_equal, {
+			favicon: 2,
+			image: 3,
+			title: 4,
+			description: 5,
+			heading: 0,
+			items: 6
+		});
+	}
+}
+
+/* generated by Svelte v3.58.0 */
+
 function create_if_block_5(ctx) {
 	let div;
 	let t_value = /*form*/ ctx[1].error_message + "";
@@ -7612,7 +8046,7 @@ function create_if_block$3(ctx) {
 	};
 }
 
-function create_fragment$3(ctx) {
+function create_fragment$4(ctx) {
 	let div1;
 	let div0;
 	let section;
@@ -7799,7 +8233,7 @@ function get_form_data(form) {
 	return object;
 }
 
-function instance$3($$self, $$props, $$invalidate) {
+function instance$4($$self, $$props, $$invalidate) {
 	let { favicon } = $$props;
 	let { image } = $$props;
 	let { title } = $$props;
@@ -7848,11 +8282,11 @@ function instance$3($$self, $$props, $$invalidate) {
 	];
 }
 
-class Component$3 extends SvelteComponent {
+class Component$4 extends SvelteComponent {
 	constructor(options) {
 		super();
 
-		init(this, options, instance$3, create_fragment$3, safe_not_equal, {
+		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
 			favicon: 7,
 			image: 8,
 			title: 9,
@@ -7866,7 +8300,7 @@ class Component$3 extends SvelteComponent {
 
 /* generated by Svelte v3.58.0 */
 
-function get_each_context$1(ctx, list, i) {
+function get_each_context$2(ctx, list, i) {
 	const child_ctx = ctx.slice();
 	child_ctx[6] = list[i];
 	child_ctx[8] = i;
@@ -7920,7 +8354,7 @@ function create_if_block$4(ctx) {
 }
 
 // (88:4) {#each items as item, i}
-function create_each_block$1(ctx) {
+function create_each_block$2(ctx) {
 	let li;
 	let div1;
 	let a;
@@ -8031,7 +8465,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-function create_fragment$4(ctx) {
+function create_fragment$5(ctx) {
 	let div1;
 	let div0;
 	let section;
@@ -8043,7 +8477,7 @@ function create_fragment$4(ctx) {
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
-		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
 	}
 
 	return {
@@ -8118,12 +8552,12 @@ function create_fragment$4(ctx) {
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
-					const child_ctx = get_each_context$1(ctx, each_value, i);
+					const child_ctx = get_each_context$2(ctx, each_value, i);
 
 					if (each_blocks[i]) {
 						each_blocks[i].p(child_ctx, dirty);
 					} else {
-						each_blocks[i] = create_each_block$1(child_ctx);
+						each_blocks[i] = create_each_block$2(child_ctx);
 						each_blocks[i].c();
 						each_blocks[i].m(ul, null);
 					}
@@ -8145,7 +8579,7 @@ function create_fragment$4(ctx) {
 	};
 }
 
-function instance$4($$self, $$props, $$invalidate) {
+function instance$5($$self, $$props, $$invalidate) {
 	let { favicon } = $$props;
 	let { image } = $$props;
 	let { title } = $$props;
@@ -8165,11 +8599,11 @@ function instance$4($$self, $$props, $$invalidate) {
 	return [heading, items, favicon, image, title, description];
 }
 
-class Component$4 extends SvelteComponent {
+class Component$5 extends SvelteComponent {
 	constructor(options) {
 		super();
 
-		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+		init(this, options, instance$5, create_fragment$5, safe_not_equal, {
 			favicon: 2,
 			image: 3,
 			title: 4,
@@ -8182,7 +8616,7 @@ class Component$4 extends SvelteComponent {
 
 /* generated by Svelte v3.58.0 */
 
-function get_each_context$2(ctx, list, i) {
+function get_each_context$3(ctx, list, i) {
 	const child_ctx = ctx.slice();
 	child_ctx[7] = list[i].link;
 	child_ctx[8] = list[i].icon;
@@ -8190,7 +8624,7 @@ function get_each_context$2(ctx, list, i) {
 }
 
 // (74:8) {#each social_links as {link, icon}}
-function create_each_block$2(ctx) {
+function create_each_block$3(ctx) {
 	let li;
 	let a;
 	let icon;
@@ -8266,7 +8700,7 @@ function create_each_block$2(ctx) {
 	};
 }
 
-function create_fragment$5(ctx) {
+function create_fragment$6(ctx) {
 	let div3;
 	let div2;
 	let footer;
@@ -8290,7 +8724,7 @@ function create_fragment$5(ctx) {
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
-		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+		each_blocks[i] = create_each_block$3(get_each_context$3(ctx, each_value, i));
 	}
 
 	const out = i => transition_out(each_blocks[i], 1, 1, () => {
@@ -8412,13 +8846,13 @@ function create_fragment$5(ctx) {
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
-					const child_ctx = get_each_context$2(ctx, each_value, i);
+					const child_ctx = get_each_context$3(ctx, each_value, i);
 
 					if (each_blocks[i]) {
 						each_blocks[i].p(child_ctx, dirty);
 						transition_in(each_blocks[i], 1);
 					} else {
-						each_blocks[i] = create_each_block$2(child_ctx);
+						each_blocks[i] = create_each_block$3(child_ctx);
 						each_blocks[i].c();
 						transition_in(each_blocks[i], 1);
 						each_blocks[i].m(ul, null);
@@ -8459,7 +8893,7 @@ function create_fragment$5(ctx) {
 	};
 }
 
-function instance$5($$self, $$props, $$invalidate) {
+function instance$6($$self, $$props, $$invalidate) {
 	let { favicon } = $$props;
 	let { image } = $$props;
 	let { title } = $$props;
@@ -8481,11 +8915,11 @@ function instance$5($$self, $$props, $$invalidate) {
 	return [social_links, favicon, image, title, description, heading, email];
 }
 
-class Component$5 extends SvelteComponent {
+class Component$6 extends SvelteComponent {
 	constructor(options) {
 		super();
 
-		init(this, options, instance$5, create_fragment$5, safe_not_equal, {
+		init(this, options, instance$6, create_fragment$6, safe_not_equal, {
 			favicon: 1,
 			image: 2,
 			title: 3,
@@ -8499,7 +8933,7 @@ class Component$5 extends SvelteComponent {
 
 /* generated by Svelte v3.58.0 */
 
-function instance$6($$self, $$props, $$invalidate) {
+function instance$7($$self, $$props, $$invalidate) {
 	let { favicon } = $$props;
 	let { image } = $$props;
 	let { title } = $$props;
@@ -8515,11 +8949,11 @@ function instance$6($$self, $$props, $$invalidate) {
 	return [favicon, image, title, description];
 }
 
-class Component$6 extends SvelteComponent {
+class Component$7 extends SvelteComponent {
 	constructor(options) {
 		super();
 
-		init(this, options, instance$6, null, safe_not_equal, {
+		init(this, options, instance$7, null, safe_not_equal, {
 			favicon: 0,
 			image: 1,
 			title: 2,
@@ -8530,7 +8964,7 @@ class Component$6 extends SvelteComponent {
 
 /* generated by Svelte v3.58.0 */
 
-function create_fragment$6(ctx) {
+function create_fragment$7(ctx) {
 	let component_0;
 	let t0;
 	let component_1;
@@ -8542,13 +8976,15 @@ function create_fragment$6(ctx) {
 	let component_4;
 	let t4;
 	let component_5;
+	let t5;
+	let component_6;
 	let current;
 
 	component_0 = new Component({
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "Blog",
@@ -8560,7 +8996,7 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "Blog",
@@ -8601,7 +9037,90 @@ function create_fragment$6(ctx) {
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
+				},
+				image: { "alt": "", "url": "" },
+				title: "Blog",
+				description: "",
+				heading: "Featured Posts",
+				items: [
+					{
+						"date": "June 3, 2023",
+						"link": {
+							"url": "/blog-entry",
+							"label": "Mastering the art of responsive design: a comprehensive guide"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"url": "https://images.unsplash.com/photo-1682674396903-9d601f2bfe43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.</p>",
+							"markdown": "This article dives into the nuts and bolts of coding web projects for clients. By the end of this article, you'll be ready to take on lots of projects.\n\n"
+						}
+					},
+					{
+						"date": "August 12, 2023",
+						"link": {
+							"url": "http://localhost:5173/blog-entry",
+							"label": "10 essential tools every web developer should know"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2371&q=80",
+							"url": "https://images.unsplash.com/photo-1683002506825-2205b4fe4f53?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2371&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.</p>",
+							"markdown": "Stay ahead of the game with our roundup of the top 10 tools every web developer should have in their toolkit, from version control systems to browser extensions that boost productivity.\n\n"
+						}
+					},
+					{
+						"date": "September 12, 2023",
+						"link": {
+							"url": "http://localhost:5173/blog-entry",
+							"label": "The future of web design: exploring innovative trends & technologies"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"url": "https://images.unsplash.com/photo-1682968356839-e72de61bd076?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry.</p>",
+							"markdown": "Get a glimpse of the future of web design as we discuss the latest trends, cutting-edge technologies, and groundbreaking ideas that are shaping the industry."
+						}
+					},
+					{
+						"date": "December 12, 2023",
+						"link": {
+							"url": "http://localhost:5173/blog-entry",
+							"label": "The Power of Minimalism in UI/UX Design"
+						},
+						"thumbnail": {
+							"alt": "",
+							"src": "https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2313&q=80",
+							"url": "https://images.unsplash.com/photo-1682795176020-1752b4446818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2313&q=80",
+							"size": null
+						},
+						"description": {
+							"html": "<p>Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics.</p>",
+							"markdown": "Discover the impact of minimalism in UI/UX design, and learn how to create clean, user-friendly interfaces that prioritize functionality and aesthetics."
+						}
+					}
+				]
+			}
+		});
+
+	component_3 = new Component$4({
+			props: {
+				favicon: {
+					"alt": "",
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "Blog",
@@ -8631,16 +9150,16 @@ function create_fragment$6(ctx) {
 			}
 		});
 
-	component_3 = new Component$4({
+	component_4 = new Component$5({
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "Blog",
 				description: "",
-				heading: "Featured Posts",
+				heading: "Sitemap",
 				items: [
 					{
 						"date": "June 3, 2023",
@@ -8714,11 +9233,11 @@ function create_fragment$6(ctx) {
 			}
 		});
 
-	component_4 = new Component$5({
+	component_5 = new Component$6({
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "Blog",
@@ -8746,11 +9265,11 @@ function create_fragment$6(ctx) {
 			}
 		});
 
-	component_5 = new Component$6({
+	component_6 = new Component$7({
 			props: {
 				favicon: {
 					"alt": "",
-					"url": "https://dbfnrqvkgwkjkzqgnfrd.supabase.co/storage/v1/object/public/images/1a9f29e7-b37e-4a46-adcf-49d3b854ed8a/1680814436263_p_%20Mark%20in%20App%20Icon.png"
+					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
 				title: "Blog",
@@ -8771,6 +9290,8 @@ function create_fragment$6(ctx) {
 			create_component(component_4.$$.fragment);
 			t4 = space();
 			create_component(component_5.$$.fragment);
+			t5 = space();
+			create_component(component_6.$$.fragment);
 		},
 		l(nodes) {
 			claim_component(component_0.$$.fragment, nodes);
@@ -8784,6 +9305,8 @@ function create_fragment$6(ctx) {
 			claim_component(component_4.$$.fragment, nodes);
 			t4 = claim_space(nodes);
 			claim_component(component_5.$$.fragment, nodes);
+			t5 = claim_space(nodes);
+			claim_component(component_6.$$.fragment, nodes);
 		},
 		m(target, anchor) {
 			mount_component(component_0, target, anchor);
@@ -8797,6 +9320,8 @@ function create_fragment$6(ctx) {
 			mount_component(component_4, target, anchor);
 			insert_hydration(target, t4, anchor);
 			mount_component(component_5, target, anchor);
+			insert_hydration(target, t5, anchor);
+			mount_component(component_6, target, anchor);
 			current = true;
 		},
 		p: noop,
@@ -8808,6 +9333,7 @@ function create_fragment$6(ctx) {
 			transition_in(component_3.$$.fragment, local);
 			transition_in(component_4.$$.fragment, local);
 			transition_in(component_5.$$.fragment, local);
+			transition_in(component_6.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
@@ -8817,6 +9343,7 @@ function create_fragment$6(ctx) {
 			transition_out(component_3.$$.fragment, local);
 			transition_out(component_4.$$.fragment, local);
 			transition_out(component_5.$$.fragment, local);
+			transition_out(component_6.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
@@ -8831,15 +9358,17 @@ function create_fragment$6(ctx) {
 			destroy_component(component_4, detaching);
 			if (detaching) detach(t4);
 			destroy_component(component_5, detaching);
+			if (detaching) detach(t5);
+			destroy_component(component_6, detaching);
 		}
 	};
 }
 
-class Component$7 extends SvelteComponent {
+class Component$8 extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, null, create_fragment$6, safe_not_equal, {});
+		init(this, options, null, create_fragment$7, safe_not_equal, {});
 	}
 }
 
-export default Component$7;
+export default Component$8;
