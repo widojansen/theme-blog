@@ -7373,7 +7373,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (126:4) {:catch error}
+// (127:4) {:catch error}
 function create_catch_block(ctx) {
 	let span;
 	let t;
@@ -7394,13 +7394,15 @@ function create_catch_block(ctx) {
 			append_hydration(span, t);
 		},
 		p: noop,
+		i: noop,
+		o: noop,
 		d(detaching) {
 			if (detaching) detach(span);
 		}
 	};
 }
 
-// (100:4) {:then value}
+// (101:4) {:then value}
 function create_then_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*value*/ ctx[7];
@@ -7444,9 +7446,11 @@ function create_then_block(ctx) {
 
 					if (each_blocks[i]) {
 						each_blocks[i].p(child_ctx, dirty);
+						transition_in(each_blocks[i], 1);
 					} else {
 						each_blocks[i] = create_each_block$1(child_ctx);
 						each_blocks[i].c();
+						transition_in(each_blocks[i], 1);
 						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
 					}
 				}
@@ -7458,6 +7462,12 @@ function create_then_block(ctx) {
 				each_blocks.length = each_value.length;
 			}
 		},
+		i(local) {
+			for (let i = 0; i < each_value.length; i += 1) {
+				transition_in(each_blocks[i]);
+			}
+		},
+		o: noop,
 		d(detaching) {
 			destroy_each(each_blocks, detaching);
 			if (detaching) detach(each_1_anchor);
@@ -7465,7 +7475,7 @@ function create_then_block(ctx) {
 	};
 }
 
-// (101:6) {#each value as item, i}
+// (102:6) {#each value as item, i}
 function create_each_block$1(ctx) {
 	let li;
 	let div1;
@@ -7475,6 +7485,7 @@ function create_each_block$1(ctx) {
 	let t1;
 	let div0;
 	let t2;
+	let li_intro;
 
 	return {
 		c() {
@@ -7522,13 +7533,22 @@ function create_each_block$1(ctx) {
 			append_hydration(li, t2);
 		},
 		p: noop,
+		i(local) {
+			if (!li_intro) {
+				add_render_callback(() => {
+					li_intro = create_in_transition(li, fade, { delay: /*i*/ ctx[10] * 100 });
+					li_intro.start();
+				});
+			}
+		},
+		o: noop,
 		d(detaching) {
 			if (detaching) detach(li);
 		}
 	};
 }
 
-// (98:24)        <span>promise is pending</span>     {:then value}
+// (99:24)        <span>loading pages</span>     {:then value}
 function create_pending_block(ctx) {
 	let span;
 	let t;
@@ -7536,12 +7556,12 @@ function create_pending_block(ctx) {
 	return {
 		c() {
 			span = element("span");
-			t = text("promise is pending");
+			t = text("loading pages");
 		},
 		l(nodes) {
 			span = claim_element(nodes, "SPAN", {});
 			var span_nodes = children(span);
-			t = claim_text(span_nodes, "promise is pending");
+			t = claim_text(span_nodes, "loading pages");
 			span_nodes.forEach(detach);
 		},
 		m(target, anchor) {
@@ -7549,6 +7569,8 @@ function create_pending_block(ctx) {
 			append_hydration(span, t);
 		},
 		p: noop,
+		i: noop,
+		o: noop,
 		d(detaching) {
 			if (detaching) detach(span);
 		}
@@ -7637,7 +7659,9 @@ function create_fragment$3(ctx) {
 			if (dirty & /*heading*/ 1) set_data(t0, /*heading*/ ctx[0]);
 			update_await_block_branch(info, ctx, dirty);
 		},
-		i: noop,
+		i(local) {
+			transition_in(info.block);
+		},
 		o: noop,
 		d(detaching) {
 			if (detaching) detach(div1);
