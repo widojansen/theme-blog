@@ -3640,7 +3640,7 @@ function create_fragment$2(ctx) {
 			attr(header, "class", "section-container svelte-ngjace");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-754ef74e");
+			attr(div3, "id", "section-754ef74e-5456-4c86-baa0-94f149ad78e9");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -7704,7 +7704,7 @@ function create_fragment$3(ctx) {
 			attr(section, "class", "section-container svelte-o5ike2");
 			attr(div0, "class", "component svelte-o5ike2");
 			attr(div1, "class", "section svelte-o5ike2");
-			attr(div1, "id", "section-63754163");
+			attr(div1, "id", "section-63754163-a178-485f-85fd-86b46c47a959");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div1, anchor);
@@ -8114,7 +8114,7 @@ function create_fragment$4(ctx) {
 			attr(section, "class", "section-container svelte-10jylfj");
 			attr(div0, "class", "component");
 			attr(div1, "class", "section");
-			attr(div1, "id", "section-6eeaaa91");
+			attr(div1, "id", "section-6eeaaa91-2985-4785-97a2-5dd44b6ec00e");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div1, anchor);
@@ -8398,7 +8398,7 @@ function create_fragment$5(ctx) {
 			attr(div1, "class", "section-container svelte-1excgdw");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-13765790");
+			attr(div3, "id", "section-13765790-eafd-4138-b734-4b00d06854ef");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -8661,7 +8661,7 @@ function create_fragment$6(ctx) {
 				image: { "alt": "", "url": "" },
 				title: "Blog",
 				description: "",
-				heading: "Sitemap",
+				heading: "Articles",
 				items: [
 					{
 						"date": "June 3, 2023",
