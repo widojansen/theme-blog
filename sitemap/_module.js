@@ -3720,7 +3720,7 @@ function create_fragment$2(ctx) {
 			attr(header, "class", "section-container svelte-ngjace");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-42b9af6c-e8e4-47d1-9121-e51069eef244");
+			attr(div3, "id", "section-42b9af6c");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -7405,7 +7405,7 @@ function create_catch_block(ctx) {
 	};
 }
 
-// (110:4) {:then value}
+// (108:4) {:then value}
 function create_then_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*value*/ ctx[8];
@@ -7478,7 +7478,40 @@ function create_then_block(ctx) {
 	};
 }
 
-// (128:10) {#if item.image.url}
+// (113:12) {#if item.description}
+function create_if_block_1$2(ctx) {
+	let div;
+	let t_value = /*item*/ ctx[9].description + "";
+	let t;
+
+	return {
+		c() {
+			div = element("div");
+			t = text(t_value);
+			this.h();
+		},
+		l(nodes) {
+			div = claim_element(nodes, "DIV", { class: true });
+			var div_nodes = children(div);
+			t = claim_text(div_nodes, t_value);
+			div_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(div, "class", "description svelte-10jylfj");
+		},
+		m(target, anchor) {
+			insert_hydration(target, div, anchor);
+			append_hydration(div, t);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+// (128:10) {#if item.image && item.image.url}
 function create_if_block$3(ctx) {
 	let img;
 	let img_data_key_value;
@@ -7516,79 +7549,72 @@ function create_if_block$3(ctx) {
 	};
 }
 
-// (111:6) {#each value as item, i}
+// (109:6) {#each value as item, i}
 function create_each_block$1(ctx) {
 	let li;
-	let div1;
+	let div;
 	let a;
 	let t0_value = (/*item*/ ctx[9].title || /*item*/ ctx[9].name) + "";
 	let t0;
 	let a_href_value;
 	let t1;
-	let div0;
-	let t2_value = /*item*/ ctx[9].description + "";
 	let t2;
 	let t3;
-	let t4;
 	let li_intro;
-	let if_block = /*item*/ ctx[9].image.url && create_if_block$3(ctx);
+	let if_block0 = /*item*/ ctx[9].description && create_if_block_1$2(ctx);
+	let if_block1 = /*item*/ ctx[9].image && /*item*/ ctx[9].image.url && create_if_block$3(ctx);
 
 	return {
 		c() {
 			li = element("li");
-			div1 = element("div");
+			div = element("div");
 			a = element("a");
 			t0 = text(t0_value);
 			t1 = space();
-			div0 = element("div");
-			t2 = text(t2_value);
+			if (if_block0) if_block0.c();
+			t2 = space();
+			if (if_block1) if_block1.c();
 			t3 = space();
-			if (if_block) if_block.c();
-			t4 = space();
 			this.h();
 		},
 		l(nodes) {
 			li = claim_element(nodes, "LI", { class: true });
 			var li_nodes = children(li);
-			div1 = claim_element(li_nodes, "DIV", { class: true });
-			var div1_nodes = children(div1);
-			a = claim_element(div1_nodes, "A", { class: true, href: true });
+			div = claim_element(li_nodes, "DIV", { class: true });
+			var div_nodes = children(div);
+			a = claim_element(div_nodes, "A", { class: true, href: true });
 			var a_nodes = children(a);
 			t0 = claim_text(a_nodes, t0_value);
 			a_nodes.forEach(detach);
-			t1 = claim_space(div1_nodes);
-			div0 = claim_element(div1_nodes, "DIV", { class: true });
-			var div0_nodes = children(div0);
-			t2 = claim_text(div0_nodes, t2_value);
-			div0_nodes.forEach(detach);
-			div1_nodes.forEach(detach);
+			t1 = claim_space(div_nodes);
+			if (if_block0) if_block0.l(div_nodes);
+			div_nodes.forEach(detach);
+			t2 = claim_space(li_nodes);
+			if (if_block1) if_block1.l(li_nodes);
 			t3 = claim_space(li_nodes);
-			if (if_block) if_block.l(li_nodes);
-			t4 = claim_space(li_nodes);
 			li_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
 			attr(a, "class", "title svelte-10jylfj");
 			attr(a, "href", a_href_value = "/" + /*item*/ ctx[9].url);
-			attr(div0, "class", "description svelte-10jylfj");
-			attr(div1, "class", "post-info");
+			attr(div, "class", "post-info");
 			attr(li, "class", "svelte-10jylfj");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
-			append_hydration(li, div1);
-			append_hydration(div1, a);
+			append_hydration(li, div);
+			append_hydration(div, a);
 			append_hydration(a, t0);
-			append_hydration(div1, t1);
-			append_hydration(div1, div0);
-			append_hydration(div0, t2);
+			append_hydration(div, t1);
+			if (if_block0) if_block0.m(div, null);
+			append_hydration(li, t2);
+			if (if_block1) if_block1.m(li, null);
 			append_hydration(li, t3);
-			if (if_block) if_block.m(li, null);
-			append_hydration(li, t4);
 		},
 		p(ctx, dirty) {
-			if (/*item*/ ctx[9].image.url) if_block.p(ctx, dirty);
+			if (/*item*/ ctx[9].description) if_block0.p(ctx, dirty);
+			if (/*item*/ ctx[9].image && /*item*/ ctx[9].image.url) if_block1.p(ctx, dirty);
 		},
 		i(local) {
 			if (!li_intro) {
@@ -7601,12 +7627,13 @@ function create_each_block$1(ctx) {
 		o: noop,
 		d(detaching) {
 			if (detaching) detach(li);
-			if (if_block) if_block.d();
+			if (if_block0) if_block0.d();
+			if (if_block1) if_block1.d();
 		}
 	};
 }
 
-// (108:18)        <span>loading pages</span>     {:then value}
+// (106:18)        <span>loading pages</span>     {:then value}
 function create_pending_block(ctx) {
 	let span;
 	let t;
@@ -7698,7 +7725,7 @@ function create_fragment$3(ctx) {
 			attr(section, "class", "section-container svelte-10jylfj");
 			attr(div0, "class", "component");
 			attr(div1, "class", "section");
-			attr(div1, "id", "section-af0d8272-8b51-4103-ac31-7e26bd128eef");
+			attr(div1, "id", "section-af0d8272");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div1, anchor);
@@ -7740,8 +7767,7 @@ function instance$3($$self, $$props, $$invalidate) {
 	let posts = get_posts();
 
 	async function get_posts() {
-		const page_list = await axios.get(`${site_url}/primo.json`).then(({ data }) => {
-			// console.log(data.pages);  
+		const page_list = await axios.get(`/primo.json`).then(({ data }) => {
 			return data.pages.map(page => ({
 				name: page.name,
 				url: page.url,
@@ -7749,7 +7775,6 @@ function instance$3($$self, $$props, $$invalidate) {
 			}));
 		});
 
-		// console.log({page_list})
 		return page_list;
 	}
 
@@ -7983,7 +8008,7 @@ function create_fragment$4(ctx) {
 			attr(div1, "class", "section-container svelte-1excgdw");
 			attr(div2, "class", "component");
 			attr(div3, "class", "section");
-			attr(div3, "id", "section-13e0c1e5-4f29-48f4-af1c-049231588ac0");
+			attr(div3, "id", "section-13e0c1e5");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div3, anchor);
@@ -8155,7 +8180,7 @@ function create_fragment$5(ctx) {
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Blog",
+				title: "Sitemap",
 				description: ""
 			}
 		});
@@ -8167,7 +8192,7 @@ function create_fragment$5(ctx) {
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Blog",
+				title: "Sitemap",
 				description: "",
 				logo: {
 					"image": {
@@ -8208,7 +8233,7 @@ function create_fragment$5(ctx) {
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Blog",
+				title: "Sitemap",
 				description: "",
 				heading: "Sitemap",
 				site_url: "https://theme-blog-chi.vercel.app"
@@ -8222,7 +8247,7 @@ function create_fragment$5(ctx) {
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Blog",
+				title: "Sitemap",
 				description: "",
 				heading: "",
 				email: "",
@@ -8254,7 +8279,7 @@ function create_fragment$5(ctx) {
 					"url": "https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true"
 				},
 				image: { "alt": "", "url": "" },
-				title: "Blog",
+				title: "Sitemap",
 				description: ""
 			}
 		});
