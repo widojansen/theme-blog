@@ -7478,7 +7478,7 @@ function create_then_block(ctx) {
 	};
 }
 
-// (128:10) {#if item.image}
+// (128:10) {#if item.image.url}
 function create_if_block$3(ctx) {
 	let img;
 	let img_data_key_value;
@@ -7531,7 +7531,7 @@ function create_each_block$1(ctx) {
 	let t3;
 	let t4;
 	let li_intro;
-	let if_block = /*item*/ ctx[9].image && create_if_block$3(ctx);
+	let if_block = /*item*/ ctx[9].image.url && create_if_block$3(ctx);
 
 	return {
 		c() {
@@ -7588,7 +7588,7 @@ function create_each_block$1(ctx) {
 			append_hydration(li, t4);
 		},
 		p(ctx, dirty) {
-			if (/*item*/ ctx[9].image) if_block.p(ctx, dirty);
+			if (/*item*/ ctx[9].image.url) if_block.p(ctx, dirty);
 		},
 		i(local) {
 			if (!li_intro) {
