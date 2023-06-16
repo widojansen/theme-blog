@@ -8445,10 +8445,7 @@ function create_fragment$7(ctx) {
 						}
 					},
 					{
-						"link": {
-							"url": "http://localhost:5173/article-list",
-							"label": "About"
-						}
+						"link": { "url": "/about", "label": "About" }
 					}
 				]
 			}
