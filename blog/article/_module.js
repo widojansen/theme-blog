@@ -8423,7 +8423,7 @@ function create_fragment$7(ctx) {
 				title: "Article",
 				description: "This is an article discussing the merits of something or another.",
 				superhead: "JUNE 3, 2023 ",
-				heading: "Some title for the blog"
+				heading: "Article Title"
 			}
 		});
 
