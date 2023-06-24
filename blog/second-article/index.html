@@ -3,7 +3,7 @@
 
 <head>
     <meta name="generator" content="Primo" />
-    <title>About my Blog</title><!-- HEAD_svelte-1pww12a_START -->
+    <title>Article</title><!-- HEAD_svelte-1pww12a_START -->
     <link rel="shortcut icon" type="image/jpg" sizes="32x32" href="https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/light.css">
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js"></script>
     <link rel="shortcut icon" type="image/jpg" sizes="32x32" href="https://github.com/primocms/primo/blob/master/static/primologo.png?raw=true">
-    <meta name="description" content="I'm a developer, designer, founder and everything in-between.">
-    <meta property="og:image" content="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80">
-    <meta name="twitter:image" content="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80">
+    <meta name="description" content="This is an article discussing the merits of something or another.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80">
     <style>
         /* Reset & standardize default styles */
         @import url("https://unpkg.com/@primo-app/primo@1.3.64/reset.css") layer;
@@ -170,49 +170,94 @@
             top: 1rem
         }
 
-        section.svelte-1xc63r4.svelte-1xc63r4 {
+        .section-container.svelte-1b2zbzi {
             display: grid;
             place-items: center;
-            max-width: var(--inner-max-width, 900px);
-            padding-bottom: 3rem
+            padding: 2rem 2rem 1rem 2rem
         }
 
-        .heading.svelte-1xc63r4.svelte-1xc63r4 {
-            text-align: center;
-            text-wrap: balance;
-            margin-bottom: 3rem
+        .superhead.svelte-1b2zbzi {
+            font-size: 1rem;
+            color: var(--color-accent2);
+            font-weight: 500;
+            margin-bottom: 0.5rem
         }
 
-        figure.svelte-1xc63r4.svelte-1xc63r4 {
-            display: grid;
-            gap: 0.25rem;
-            margin-bottom: 2.5rem
+        .heading.svelte-1b2zbzi {
+            margin-bottom: 2rem
         }
 
-        figure.svelte-1xc63r4 img.svelte-1xc63r4 {
-            width: 100px;
-            height: 100px;
-            -o-object-fit: cover;
-            object-fit: cover;
-            border-radius: 100%
+        @media(min-width:700px) {
+            img.svelte-1b2zbzi {
+                max-width: 750px
+            }
         }
 
-        figure.svelte-1xc63r4 figcaption.svelte-1xc63r4 {
-            color: var(--color-shade, #2d3339);
-            font-size: 0.875rem;
-            font-weight: 400;
-            text-align: center
+        .section-container.svelte-1lugy4n {
+            max-width: var(--inner-max-width, 800px);
+            padding: 2rem
         }
 
-        .content.svelte-1xc63r4.svelte-1xc63r4 {
+        .content.svelte-1lugy4n img {
+            width: 100%;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius)
+        }
+
+        .content.svelte-1lugy4n p {
+            padding: 0.25rem 0;
             line-height: 1.5;
             font-family: var(--body-font);
             font-weight: 300;
+            margin-bottom: 1rem;
             color: #2d3339
         }
 
-        .content.svelte-1xc63r4 p {
-            margin-bottom: 1rem
+        .content.svelte-1lugy4n a {
+            text-decoration: underline
+        }
+
+        .content.svelte-1lugy4n h1 {
+            font-size: clamp(1.75rem, 10vw, 2.25rem);
+            font-weight: 600;
+            letter-spacing: -0.08rem;
+            margin-bottom: 1rem;
+            line-height: 1.1
+        }
+
+        .content.svelte-1lugy4n h2 {
+            font-size: clamp(1.5rem, 10vw, 2.125rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.06rem;
+            line-height: 1.1
+        }
+
+        .content.svelte-1lugy4n h3 {
+            font-size: clamp(1.25rem, 10vw, 1.75rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.05rem;
+            line-height: 1.1
+        }
+
+        .content.svelte-1lugy4n ul {
+            list-style: disc;
+            padding: 0.25rem 0;
+            padding-left: 1.25rem
+        }
+
+        .content.svelte-1lugy4n ol {
+            list-style: decimal;
+            padding-left: 1.25rem;
+            margin-bottom: 2rem
+        }
+
+        .content.svelte-1lugy4n blockquote {
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius)
         }
 
         .section-container.svelte-a9pabn.svelte-a9pabn {
@@ -325,7 +370,7 @@
 
 <body id="page">
 
-    <div class="section" id="section-534dd724">
+    <div class="section" id="section-c6f463f0">
         <header class="section-container svelte-ngjace">
             <div class="desktop-nav svelte-ngjace"><a href="/" class="logo svelte-ngjace">Name</a>
                 <nav class="svelte-ngjace"><a class="link svelte-ngjace" href="/">Home</a><a class="link svelte-ngjace" href="/blog">Blog</a><a class="link svelte-ngjace" href="/about">About</a></nav>
@@ -345,20 +390,37 @@
             </div>
         </header>
     </div>
-    <div class="section" id="section-b9f3466a">
-        <section class="section-container svelte-1xc63r4">
-            <h1 class="heading svelte-1xc63r4">I'm a developer, designer, founder and everything in-between.</h1>
-            <figure class="svelte-1xc63r4"><img src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="Abdullah" class="svelte-1xc63r4">
-                <figcaption class="svelte-1xc63r4">Abdullah</figcaption>
-            </figure>
-            <div class="content svelte-1xc63r4"><!-- HTML_TAG_START -->
-                <p>I like to write about to the that true, claim cognitive think he always design with shall subjective to decided could the that on her expected boa the to spree. State with has in state client but went here, quickly on gone he commitment concept and set value to were harmonics.</p>
-                <p>Was me. Ran of creating assistant the in fall bidding brought dragged they'd volumes one the in any that as again. Feedback schemes allowed to what to in world avoid front the consideration the buttons were we parks. A the of pleasure he last a where have of up, the simple, never.</p>
-                <p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when fundamentals are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand.</p><!-- HTML_TAG_END -->
-            </div>
-        </section>
+    <div class="section" id="section-737d5af7">
+        <header class="section-container svelte-1b2zbzi"><span class="superhead svelte-1b2zbzi">JUNE 3, 2023 </span>
+            <h1 class="heading svelte-1b2zbzi">Some title for the blog</h1>
+            <img src="https://images.unsplash.com/photo-1577717707588-58e49821e851?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2370&amp;q=80" alt="" class="svelte-1b2zbzi">
+        </header>
     </div>
-    <div class="section" id="section-399a9c77">
+    <div class="section" id="section-88573770">
+        <div class="section">
+            <div class="section-container content svelte-1lugy4n"><!-- HTML_TAG_START -->
+                <h1>Heading 1</h1>
+                <p>Represent the entire the both feedback need continued named odd that each steadily facility is the threw to she thousand <mark>she</mark> in on I distinct yards is agency, the lane. Hand. Searching their a origin my hero's clear not semantics, I had <strong>work of destruction</strong>.</p>
+                <p><em>Some more text that's italicized to make an impact.</em></p>
+                <ol>
+                    <li>
+                        <p>Here are some new ways to learn about this article</p>
+                    </li>
+                    <li>
+                        <p>Some more ways</p>
+                    </li>
+                    <li>
+                        <p>Go to "Site" and then css to change the styling of this editorial content.</p>
+                    </li>
+                </ol>
+                <h2>Heading 2</h2>
+                <p>Concise of that, men's apartment, the one with annoyed. Sported misleads such a for best. At her, both it a must self-interest client that when <strong><mark>fundamentals</mark></strong> are board theory the of come boss's no is though like create phase would long covered be enterprises in a of back his to top was had king's the was domed in display legs, hand. My the as is gradually box duties belly, later and made was <strong><mark>constructing</mark></strong> first succeeded she may are as and goals since and was blind three blocks lay it them. The if truth, in need clean had.</p>
+                <h3>Heading 3</h3>
+                <p>Some content that is interesting to read about. Many length did sections. The there and wonder take release. Love is the Way. Cleaning or it elucidates concept gain, word front my privilege frequency credit you he butter as four came insidious his for focuses interfaces hotel you cover minutes us, were and abundantly half on of succeed as be up for mountains.</p><!-- HTML_TAG_END -->
+            </div>
+        </div>
+    </div>
+    <div class="section" id="section-e98c4463">
         <section class="section-container svelte-a9pabn">
             <hr class="svelte-a9pabn">
             <h2 class="title svelte-a9pabn">Sign up to get weekly blog entires about X topic </h2>
@@ -367,7 +429,7 @@
             </form>
         </section>
     </div>
-    <div class="section" id="section-30173ceb">
+    <div class="section" id="section-fdad928f">
         <footer>
             <div class="section-container svelte-1excgdw">
                 <hr class="svelte-1excgdw">

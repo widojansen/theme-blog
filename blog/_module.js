@@ -3099,7 +3099,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (108:31) 
+// (107:31) 
 function create_if_block_4(ctx) {
 	let img;
 	let img_src_value;
@@ -3136,7 +3136,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (106:6) {#if logo.title}
+// (105:6) {#if logo.title}
 function create_if_block_3(ctx) {
 	let t_value = /*logo*/ ctx[0].title + "";
 	let t;
@@ -3160,7 +3160,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (113:6) {#each site_nav as { link }}
+// (112:6) {#each site_nav as { link }}
 function create_each_block_1(ctx) {
 	let a;
 	let t_value = /*link*/ ctx[10].label + "";
@@ -3206,7 +3206,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (125:31) 
+// (124:31) 
 function create_if_block_2(ctx) {
 	let img;
 	let img_src_value;
@@ -3243,7 +3243,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (123:6) {#if logo.title}
+// (122:6) {#if logo.title}
 function create_if_block_1$1(ctx) {
 	let t_value = /*logo*/ ctx[0].title + "";
 	let t;
@@ -3267,7 +3267,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (135:4) {#if mobileNavOpen}
+// (134:4) {#if mobileNavOpen}
 function create_if_block$2(ctx) {
 	let nav;
 	let t;
@@ -3400,7 +3400,7 @@ function create_if_block$2(ctx) {
 	};
 }
 
-// (137:8) {#each site_nav as { link }}
+// (136:8) {#each site_nav as { link }}
 function create_each_block(ctx) {
 	let a;
 	let t_value = /*link*/ ctx[10].label + "";
@@ -3441,7 +3441,6 @@ function create_each_block(ctx) {
 }
 
 function create_fragment$2(ctx) {
-	let div3;
 	let div2;
 	let header;
 	let div0;
@@ -3489,7 +3488,6 @@ function create_fragment$2(ctx) {
 
 	return {
 		c() {
-			div3 = element("div");
 			div2 = element("div");
 			header = element("header");
 			div0 = element("div");
@@ -3514,9 +3512,7 @@ function create_fragment$2(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			div3 = claim_element(nodes, "DIV", { class: true, id: true });
-			var div3_nodes = children(div3);
-			div2 = claim_element(div3_nodes, "DIV", { class: true });
+			div2 = claim_element(nodes, "DIV", { class: true, id: true });
 			var div2_nodes = children(div2);
 			header = claim_element(div2_nodes, "HEADER", { class: true });
 			var header_nodes = children(header);
@@ -3553,7 +3549,6 @@ function create_fragment$2(ctx) {
 			div1_nodes.forEach(detach);
 			header_nodes.forEach(detach);
 			div2_nodes.forEach(detach);
-			div3_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
@@ -3567,13 +3562,11 @@ function create_fragment$2(ctx) {
 			attr(button, "aria-label", "Open mobile navigation");
 			attr(div1, "class", "mobile-nav svelte-ngjace");
 			attr(header, "class", "section-container svelte-ngjace");
-			attr(div2, "class", "component");
-			attr(div3, "class", "section");
-			attr(div3, "id", "section-af71ccc4-613b-4254-ac74-b2e4251d658c");
+			attr(div2, "class", "section");
+			attr(div2, "id", "section-af71ccc4");
 		},
 		m(target, anchor) {
-			insert_hydration(target, div3, anchor);
-			append_hydration(div3, div2);
+			insert_hydration(target, div2, anchor);
 			append_hydration(div2, header);
 			append_hydration(header, div0);
 			append_hydration(div0, a0);
@@ -3686,7 +3679,7 @@ function create_fragment$2(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div3);
+			if (detaching) detach(div2);
 
 			if (if_block0) {
 				if_block0.d();
@@ -3764,7 +3757,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (105:8) {#if item.thumbnail.url}
+// (104:8) {#if item.thumbnail.url}
 function create_if_block$3(ctx) {
 	let img;
 	let img_data_key_value;
@@ -3810,7 +3803,7 @@ function create_if_block$3(ctx) {
 	};
 }
 
-// (88:4) {#each items as item, i}
+// (87:4) {#each items as item, i}
 function create_each_block$1(ctx) {
 	let li;
 	let div1;
@@ -3923,8 +3916,7 @@ function create_each_block$1(ctx) {
 }
 
 function create_fragment$3(ctx) {
-	let div1;
-	let div0;
+	let div;
 	let section;
 	let h2;
 	let t0;
@@ -3939,8 +3931,7 @@ function create_fragment$3(ctx) {
 
 	return {
 		c() {
-			div1 = element("div");
-			div0 = element("div");
+			div = element("div");
 			section = element("section");
 			h2 = element("h2");
 			t0 = text(/*heading*/ ctx[0]);
@@ -3954,11 +3945,9 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			div1 = claim_element(nodes, "DIV", { class: true, id: true });
-			var div1_nodes = children(div1);
-			div0 = claim_element(div1_nodes, "DIV", { class: true });
-			var div0_nodes = children(div0);
-			section = claim_element(div0_nodes, "SECTION", { class: true });
+			div = claim_element(nodes, "DIV", { class: true, id: true });
+			var div_nodes = children(div);
+			section = claim_element(div_nodes, "SECTION", { class: true });
 			var section_nodes = children(section);
 			h2 = claim_element(section_nodes, "H2", { class: true });
 			var h2_nodes = children(h2);
@@ -3974,22 +3963,19 @@ function create_fragment$3(ctx) {
 
 			ul_nodes.forEach(detach);
 			section_nodes.forEach(detach);
-			div0_nodes.forEach(detach);
-			div1_nodes.forEach(detach);
+			div_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
 			attr(h2, "class", "svelte-10jylfj");
 			attr(ul, "class", "items svelte-10jylfj");
 			attr(section, "class", "section-container svelte-10jylfj");
-			attr(div0, "class", "component");
-			attr(div1, "class", "section");
-			attr(div1, "id", "section-71b583d2-e0e7-4da5-8a6f-ff3f7f4fc064");
+			attr(div, "class", "section");
+			attr(div, "id", "section-71b583d2");
 		},
 		m(target, anchor) {
-			insert_hydration(target, div1, anchor);
-			append_hydration(div1, div0);
-			append_hydration(div0, section);
+			insert_hydration(target, div, anchor);
+			append_hydration(div, section);
 			append_hydration(section, h2);
 			append_hydration(h2, t0);
 			append_hydration(section, t1);
@@ -4030,7 +4016,7 @@ function create_fragment$3(ctx) {
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if (detaching) detach(div1);
+			if (detaching) detach(div);
 			destroy_each(each_blocks, detaching);
 		}
 	};
@@ -4080,7 +4066,7 @@ function get_each_context$2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (74:8) {#each social_links as {link, icon}}
+// (73:8) {#each social_links as {link, icon}}
 function create_each_block$2(ctx) {
 	let li;
 	let a;
@@ -4158,7 +4144,6 @@ function create_each_block$2(ctx) {
 }
 
 function create_fragment$4(ctx) {
-	let div3;
 	let div2;
 	let footer;
 	let div1;
@@ -4190,7 +4175,6 @@ function create_fragment$4(ctx) {
 
 	return {
 		c() {
-			div3 = element("div");
 			div2 = element("div");
 			footer = element("footer");
 			div1 = element("div");
@@ -4215,9 +4199,7 @@ function create_fragment$4(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			div3 = claim_element(nodes, "DIV", { class: true, id: true });
-			var div3_nodes = children(div3);
-			div2 = claim_element(div3_nodes, "DIV", { class: true });
+			div2 = claim_element(nodes, "DIV", { class: true, id: true });
 			var div2_nodes = children(div2);
 			footer = claim_element(div2_nodes, "FOOTER", {});
 			var footer_nodes = children(footer);
@@ -4254,7 +4236,6 @@ function create_fragment$4(ctx) {
 			div1_nodes.forEach(detach);
 			footer_nodes.forEach(detach);
 			div2_nodes.forEach(detach);
-			div3_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
@@ -4266,13 +4247,11 @@ function create_fragment$4(ctx) {
 			attr(ul, "class", "svelte-1excgdw");
 			attr(div0, "class", "footer svelte-1excgdw");
 			attr(div1, "class", "section-container svelte-1excgdw");
-			attr(div2, "class", "component");
-			attr(div3, "class", "section");
-			attr(div3, "id", "section-5b3c51ea-b303-4d79-bacc-69d8f96007dd");
+			attr(div2, "class", "section");
+			attr(div2, "id", "section-5b3c51ea");
 		},
 		m(target, anchor) {
-			insert_hydration(target, div3, anchor);
-			append_hydration(div3, div2);
+			insert_hydration(target, div2, anchor);
 			append_hydration(div2, footer);
 			append_hydration(footer, div1);
 			append_hydration(div1, hr);
@@ -4344,7 +4323,7 @@ function create_fragment$4(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div3);
+			if (detaching) detach(div2);
 			destroy_each(each_blocks, detaching);
 		}
 	};
@@ -4474,17 +4453,9 @@ function create_fragment$5(ctx) {
 					"title": "Name"
 				},
 				site_nav: [
+					{ "link": { "url": "/", "label": "Home" } },
 					{
-						"link": {
-							"url": "http://localhost:5173/",
-							"label": "Home"
-						}
-					},
-					{
-						"link": {
-							"url": "http://localhost:5173/article-list",
-							"label": "Blog"
-						}
+						"link": { "url": "/blog", "label": "Blog" }
 					},
 					{
 						"link": { "url": "/about", "label": "About" }
