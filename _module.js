@@ -7880,7 +7880,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (104:8) {#if item.thumbnail.url}
+// (96:8) {#if item.thumbnail.url}
 function create_if_block$4(ctx) {
 	let img;
 	let img_data_key_value;
